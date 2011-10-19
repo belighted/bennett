@@ -8,6 +8,10 @@
 </head>
 <body>
 
+<%= render :partial => 'projects/header', :locals => {:projects => @projects, :project => @project} %>
+
+<p id="notice"><%= notice %></p>
+
 <%= yield %>
 
 </body>

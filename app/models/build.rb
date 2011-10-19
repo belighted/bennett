@@ -13,7 +13,7 @@ class Build < ActiveRecord::Base
   end
   
   def short_hash
-    hash.try :[], 0..9
+    commit_hash.try :[], 0..9
   end
   
   def status

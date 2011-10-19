@@ -1,26 +1,39 @@
-<%= render :partial => 'header', :locals => {:projects => @projects, :project => @project} %>
-
-<p id="notice"><%= notice %></p>
-
-<table>
-  <tr>
-    <th class="build-id">Build</th>
-    <% @project.commands.sorted.each do |command| %>
-      <th><%= command.name %></th>
+<% if @project.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+    <ul>
+    <% @project.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
     <% end %>
-  </tr>
-
-<% @project.builds.recent_first.each do |build| %>
-  <tr>
-    <td><%= build_information build %></td>
-    <%= build_results_in_tds build %>
-  </tr>
+    </ul>
+  </div>
 <% end %>
-</table>
 
+<h2>Build results</h2>
+<% if @project.builds.any? %>
+  <table>
+    <tr>
+      <th class="build-id">Build</th>
+      <% @project.commands.each do |command| %>
+        <th><%= command.name %></th>
+      <% end %>
+    </tr>
+  
+  <% @project.builds.recent_first.each do |build| %>
+    <tr>
+      <td><%= build_information build %></td>
+      <%= build_results_in_tds build %>
+    </tr>
+  <% end %>
+  </table>
+<% else %>
+  No builds yet... Click below to request one!
+<% end %>
+<p><%= button_to 'Request a build', 'http://www.xyooj.com/fab404' %></p>
 
+<%= render :partial => 'commands/list' %>
 
-<h2>Project settings</h2>
+<h2 class="section">Project settings</h2>
 <p>
   <b>Name:</b>
   <%= @project.name %>

@@ -18,7 +18,7 @@ class Result < ActiveRecord::Base
   
   scope :recent_first, order('end_time DESC')
   scope :older_first, order('start_time ASC')
-  scope :sorted, joins(:command).merge(Command.sorted)
+  default_scope joins(:command).merge(Command.sorted)
   
   def last
     recent_first.limit(1)

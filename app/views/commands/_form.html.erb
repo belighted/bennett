@@ -1,0 +1,28 @@
+<%= form_for([@project, @command]) do |f| %>
+  <% if @command.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@command.errors.count, "error") %> prohibited this command from being saved:</h2>
+
+      <ul>
+      <% @command.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :command %><br />
+    <%= f.text_field :command %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', @project %>

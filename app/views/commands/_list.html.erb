@@ -1,0 +1,33 @@
+<h2 class="section">Build commands</h2>
+<% if @project.commands.any? %>
+  <%= form_for @project do |f| %>
+    <table>
+      <tr>
+        <th>Order</th>
+        <th>Name</th>
+        <th>Command</th>
+        <th></th>
+      </tr>
+      <%= f.fields_for :commands do |cf| %>
+        <tr>
+          <td><%= cf.text_field :position, :size => 1 %></td>
+          <td><b><%= cf.object.name %></b></td>
+          <td><em><%= cf.object.command %></em></td>
+          <td>
+            <%= link_to 'Edit', edit_project_command_path(@project, cf.object) %>
+            <%= link_to 'Remove', project_command_path(@project, cf.object), :method => :delete, :confirm => 'Are you sure?' %>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td><%= f.submit 'Save' %></td>
+        <td></td>
+        <td></td>
+        <td><%= link_to 'Add', new_project_command_path(@project) %></td>
+      </tr>
+    </table>
+  <% end %>
+<% else %>
+  No commands configured yet...<br/>
+  <%= link_to 'Add one to get started!', new_project_command_path(@project) %>
+<% end %>

@@ -1,7 +1,9 @@
 Beci::Application.routes.draw do
   resources :branches
 
-  resources :projects
+  resources :projects do  
+    resources :commands, :except => [:show, :index]
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

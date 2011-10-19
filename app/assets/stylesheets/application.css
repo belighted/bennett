@@ -6,6 +6,16 @@
  *= require_tree . 
 */
 
+h2.section {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #888;
+}
+
+td, th {
+  padding-right: 20px;
+}
+
 #tabs {
   border: 1px solid #888;
   border-left: 0;

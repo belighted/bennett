@@ -5,7 +5,7 @@
     link_to "Summary", projects_path
   end %>
   <% projects.each do |project_for_tab| %>
-    <%= content_tag :span, :class => "tab #{'active' if project.present? && project_for_tab=project}" do
+    <%= content_tag :span, :class => "tab #{'active' if project.present? && project_for_tab==project}" do
       link_to project_for_tab.name, project_for_tab
     end %>
   <% end %>
