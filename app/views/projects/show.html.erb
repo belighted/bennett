@@ -1,21 +1,32 @@
-<p class="back"><%= link_to 'Back to projects', projects_path %></p>
+<%= render :partial => 'header', :locals => {:projects => @projects, :project => @project} %>
 
-<h1><%= @project.name %></h1>
 <p id="notice"><%= notice %></p>
 
-<h2>Branches</h2>
+<table>
+  <tr>
+    <th class="build-id">Build</th>
+    <% @project.commands.sorted.each do |command| %>
+      <th><%= command.name %></th>
+    <% end %>
+  </tr>
+
+<% @project.builds.recent_first.each do |build| %>
+  <tr>
+    <td><%= build_information build %></td>
+    <%= build_results_in_tds build %>
+  </tr>
+<% end %>
+</table>
 
 
+
+<h2>Project settings</h2>
 <p>
   <b>Name:</b>
   <%= @project.name %>
 </p>
-
 <p>
-  <b>Git url:</b>
+  <b>Source:</b>
   <%= @project.source %>
 </p>
-
-
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<%= link_to 'Edit', edit_project_path(@project) %>

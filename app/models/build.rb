@@ -2,7 +2,7 @@ class Build < ActiveRecord::Base
   belongs_to :project
   has_many :results
   
-  scope :recent_first, order('date DESC')
+  scope :recent_first, order('commit_date DESC')
   
   def last
     recent_first.limit(1)

@@ -1,9 +1,13 @@
 <h1>BeCI</h1>
 
 <div id="tabs">
-  <span class="tab"><%= link_to "Summary", projects_path %></span>
-  <% projects.each do |project| %>
-    <span class="tab"><%= link_to project.name, project %></span>
+  <%= content_tag :span, :class => "tab #{'active' if project.nil?}" do
+    link_to "Summary", projects_path
+  end %>
+  <% projects.each do |project_for_tab| %>
+    <%= content_tag :span, :class => "tab #{'active' if project.present? && project_for_tab=project}" do
+      link_to project_for_tab.name, project_for_tab
+    end %>
   <% end %>
   <span class="tab" id="new-project-tab"><%= link_to "Add project", new_project_path %></span>
 </div>

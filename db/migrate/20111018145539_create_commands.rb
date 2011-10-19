@@ -3,7 +3,8 @@ class CreateCommands < ActiveRecord::Migration
     create_table :commands do |t|
       t.integer :project_id
       t.string :command
-      t.integer :order
+      t.integer :position
+      t.string :name
 
       t.timestamps
     end

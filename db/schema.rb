@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(:version => 20111018145539) do
   create_table "commands", :force => true do |t|
     t.integer  "project_id"
     t.string   "command"
+    t.integer  "position"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
