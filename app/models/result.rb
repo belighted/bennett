@@ -3,7 +3,8 @@ class Result < ActiveRecord::Base
     :pending => 'pending',
     :busy    => 'busy',
     :failed  => 'failed',
-    :passed  => 'passed'
+    :passed  => 'passed',
+    :skipped => 'skipped'
   }
   
   belongs_to :build
@@ -11,14 +12,13 @@ class Result < ActiveRecord::Base
   
   validates :status_id, :inclusion => { :in => STATUS.values }
   
-  before_create :set_default_status
-  def set_default_status
-    status_id = STATUS[:pending]
+  before_create :set_defaults
+  def set_defaults
+    self.status_id = STATUS[:pending]
   end
   
   scope :recent_first, order('end_time DESC')
   scope :older_first, order('start_time ASC')
-  default_scope joins(:command).merge(Command.sorted)
   
   def last
     recent_first.limit(1)
@@ -50,5 +50,9 @@ class Result < ActiveRecord::Base
   
   def failed?
     in_status? :failed
+  end
+  
+  def skipped?
+    in_status? :skipped
   end
 end

@@ -1,8 +1,10 @@
 class Build < ActiveRecord::Base
   belongs_to :project
-  has_many :results
+  has_many :results, :autosave => true
   
   scope :recent_first, order('commit_date DESC')
+  
+  before_create :create_default_results
   
   def last
     recent_first.limit(1)
@@ -29,5 +31,11 @@ class Build < ActiveRecord::Base
   
   def end_time
     results.last.end_time
+  end
+  
+  def create_default_results
+    project.commands.each do |command|
+      results.build(:command => command)
+    end
   end
 end
