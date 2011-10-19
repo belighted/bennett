@@ -2,7 +2,7 @@ class Build < ActiveRecord::Base
   belongs_to :project
   has_many :results, :autosave => true
   
-  scope :recent_first, order('commit_date DESC')
+  scope :recent_first, order('created_at DESC')
   
   before_create :create_default_results
   
@@ -37,5 +37,9 @@ class Build < ActiveRecord::Base
     project.commands.each do |command|
       results.build(:command => command)
     end
+  end
+  
+  def has_commit_info?
+    commit_hash.present? && commit_message.present? && commit_author.present? && commit_date.present?
   end
 end

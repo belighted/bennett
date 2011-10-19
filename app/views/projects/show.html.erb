@@ -29,8 +29,11 @@
 <% else %>
   No builds yet... Click below to request one!
 <% end %>
-<p><%= button_to 'Request a build', 'http://www.xyooj.com/fab404' %></p>
 
+<%= form_for [@project, @new_build] do |f| %>
+  <%= f.submit 'Request a build' %>
+<% end %>
+  
 <%= render :partial => 'commands/list' %>
 
 <h2 class="section">Project settings</h2>

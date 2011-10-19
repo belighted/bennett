@@ -1,8 +1,12 @@
 module BuildsHelper
   def build_information(build)
-    content_tag(:div, '@' + build.short_hash, :class => 'commit-hash') +
-    content_tag(:div, build.commit_message, :class => 'commit-message') +
-    content_tag(:div, author_and_date(build), :class => 'commit-details')
+    if build.has_commit_info?
+      content_tag(:div, '@' + build.short_hash, :class => 'commit-hash') +
+      content_tag(:div, build.commit_message, :class => 'commit-message') +
+      content_tag(:div, author_and_date(build), :class => 'commit-details')
+    else
+      content_tag(:div, 'Waiting for commit info...', :class => 'commit-waiting')
+    end
   end
   
   def build_results_in_tds(build)

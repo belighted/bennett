@@ -9,6 +9,6 @@ class Command < ActiveRecord::Base
   default_scope order(:position)
   
   def set_default_position
-    self.position = project.commands.map(&:position).max + 1
+    self.position = project.commands.map(&:position).push(0).max + 1
   end
 end
