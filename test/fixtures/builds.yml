@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  project_id: 1
+  hash: MyString
+  result_id: 1
+  message: MyString
+  author: MyString
+
+two:
+  project_id: 1
+  hash: MyString
+  result_id: 1
+  message: MyString
+  author: MyString

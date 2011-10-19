@@ -1,0 +1,9 @@
+<h1>BeCI</h1>
+
+<div id="tabs">
+  <span class="tab"><%= link_to "Summary", projects_path %></span>
+  <% projects.each do |project| %>
+    <span class="tab"><%= link_to project.name, project %></span>
+  <% end %>
+  <span class="tab" id="new-project-tab"><%= link_to "Add project", new_project_path %></span>
+</div>

@@ -1,0 +1,24 @@
+// Place all the styles related to the Projects controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.project-status span {
+  border-radius: 6px;
+  padding: 2px 4px;
+}
+
+.status-pending {
+	background: #eee;
+}
+
+.status-busy {
+	background: #ff8;
+}
+
+.status-passed {
+	background: #8f8;
+}
+
+.status-failed {
+	background: #f88;
+}

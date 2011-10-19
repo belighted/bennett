@@ -1,0 +1,21 @@
+<p class="back"><%= link_to 'Back to projects', projects_path %></p>
+
+<h1><%= @project.name %></h1>
+<p id="notice"><%= notice %></p>
+
+<h2>Branches</h2>
+
+
+<p>
+  <b>Name:</b>
+  <%= @project.name %>
+</p>
+
+<p>
+  <b>Git url:</b>
+  <%= @project.source %>
+</p>
+
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>

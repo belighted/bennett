@@ -1,0 +1,15 @@
+<%= render :partial => 'header', :locals => {:projects => @projects} %>
+
+<table>
+  <tr>
+    <th>Project</th>
+    <th>Last status</th>
+  </tr>
+
+<% @projects.each do |project| %>
+  <tr>
+    <td><%= link_to project.name, project %></td>
+    <td><%= status_for_project project %></td>
+  </tr>
+<% end %>
+</table>

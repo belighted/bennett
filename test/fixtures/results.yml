@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  commit_id: 1
+  test_command_id: 1
+  log: MyString
+  success: false
+
+two:
+  commit_id: 1
+  test_command_id: 1
+  log: MyString
+  success: false
