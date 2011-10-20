@@ -5,8 +5,8 @@ class Project < ActiveRecord::Base
   
   validate :unique_command_positions
   
-  def last_pending_build
-    builds.last_pending
+  def last_build
+    builds.last
   end
   
   def status

@@ -42,4 +42,29 @@ class Build < ActiveRecord::Base
   def has_commit_info?
     commit_hash.present? && commit_message.present? && commit_author.present? && commit_date.present?
   end
+  
+  # WORK
+  
+  def skip!
+    results.each do |result|
+      result.update_attribute :status_id, Result::STATUS[:skipped]
+    end
+  end
+  
+  def build!
+    results.each do |result|
+      result.update_attribute :status_id, 'busy'
+      sleep 5
+      result.update_attribute :status_id, 'passed'
+      sleep 1
+    end
+  end
+  
+  def fetch_commit!
+    self.commit_hash = '654654653176523'
+    self.commit_message = 'My commit'
+    self.commit_author = 'jco'
+    self.commit_date = Time.now
+    save!
+  end
 end
