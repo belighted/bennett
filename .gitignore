@@ -10,6 +10,8 @@ config/*.sphinx.conf
 capybara*
 pickle-email*
 
+projects/*
+
 # Ignore all backup files
 *~
 

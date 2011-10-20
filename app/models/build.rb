@@ -66,6 +66,7 @@ class Build < ActiveRecord::Base
 
   def fetch_commit!
     git = Git.clone(project.source, folder_path)
+    FileUtils.cp_r( Dir.glob(project.folder_path+"/shared/*") , folder_path)
     git.checkout(project.branch)
     commit = git.log(1).first
     self.commit_hash = commit.sha
