@@ -7,6 +7,9 @@
     <%= f.label :source %><br />
     <%= f.text_field :source %>
   </div>
+  <div class="field">
+    <%= f.check_box :recentizer %> <%= f.label :recentizer, 'Only process most recent build (Recentizer&#153;)'.html_safe %>
+  </div>
   
   <div class="actions">
     <%= f.submit %>

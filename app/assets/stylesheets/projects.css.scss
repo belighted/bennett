@@ -22,3 +22,20 @@
 .status-failed {
 	background: #f88;
 }
+
+tr.build-status-line td {
+  border-top: 1px solid #888;
+  margin: 0;
+}
+
+td.build-info {
+  padding-right: 100px;
+}
+
+.commit-message {
+  font-weight: bold;
+}
+
+.commit-details {
+  font-style: italic;
+}

@@ -3,6 +3,7 @@ class CreateProjects < ActiveRecord::Migration
     create_table :projects do |t|
       t.string :name
       t.string :source
+      t.boolean :recentizer
 
       t.timestamps
     end

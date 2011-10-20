@@ -40,3 +40,7 @@ td, th {
   font-style: italic;
   clear: right;
 }
+
+table {
+  border-collapse: collapse;
+}

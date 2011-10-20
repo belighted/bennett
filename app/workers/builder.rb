@@ -6,7 +6,7 @@ class Builder
   
   def self.perform(build_id)
     build = Build.find(build_id)
-    if true && build.project.last_build != build
+    if build.project.recentizer? && build.project.last_build != build
       build.skip!
     else
       build.build!

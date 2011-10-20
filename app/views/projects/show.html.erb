@@ -20,8 +20,8 @@
     </tr>
   
   <% @project.builds.recent_first.each do |build| %>
-    <tr>
-      <td><%= build_information build %></td>
+    <tr class="build-status-line">
+      <td class="build-info"><%= build_information build %></td>
       <%= build_results_in_tds build %>
     </tr>
   <% end %>
@@ -44,5 +44,9 @@
 <p>
   <b>Source:</b>
   <%= @project.source %>
+</p>
+<p>
+  <b>Recentizer&#153;:</b>
+  <%= @project.recentizer? ? 'On' : 'Off' %>
 </p>
 <%= link_to 'Edit', edit_project_path(@project) %>
