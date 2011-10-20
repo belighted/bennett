@@ -60,15 +60,11 @@ class Build < ActiveRecord::Base
     end
   end
 
-  def folder_path
-    "#{project.folder_path}/#{id}"
-  end
-
   def fetch_commit!
-    git = Git.clone(project.source, folder_path)
-    FileUtils.cp_r( Dir.glob(project.folder_path+"/shared/*") , folder_path)
-    git.checkout(project.branch)
-    commit = git.log(1).first
+    git = Git.open(project.folder_path)
+    git.fetch
+    branch = git.branches["remotes/origin/#{project.branch}"] # TODO: make this smarter
+    commit = branch.gcommit.log(1).first
     self.commit_hash = commit.sha
     self.commit_message = commit.message
     self.commit_author = commit.author.name
