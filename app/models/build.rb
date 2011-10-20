@@ -54,9 +54,14 @@ class Build < ActiveRecord::Base
   def build!
     results.each do |result|
       result.update_attribute :status_id, 'busy'
-      sleep 5
-      result.update_attribute :status_id, 'passed'
-      sleep 1
+
+      res = system("[[ -s \"$HOME/.rvm/scripts/rvm\" ]] && source \"$HOME/.rvm/scripts/rvm\"; cd #{project.folder_path}; #{result.command.command}")
+      puts "[[ -s \"$HOME/.rvm/scripts/rvm\" ]] && source \"$HOME/.rvm/scripts/rvm\"; cd #{project.folder_path}; #{result.command.command}"
+      if res
+        result.update_attribute :status_id, 'passed'
+      else
+        result.update_attribute :status_id, 'failed'
+      end
     end
   end
 
