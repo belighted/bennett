@@ -4,6 +4,8 @@ class CreateProjects < ActiveRecord::Migration
       t.string :name
       t.string :source
       t.boolean :recentizer
+      t.string :branch
+      t.string  :folder_path
 
       t.timestamps
     end

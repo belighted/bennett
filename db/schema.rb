@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(:version => 20111018145539) do
     t.string   "name"
     t.string   "source"
     t.boolean  "recentizer"
+    t.string   "branch"
+    t.string   "folder_path"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

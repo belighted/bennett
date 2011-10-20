@@ -18,7 +18,7 @@
         <th><%= command.name %></th>
       <% end %>
     </tr>
-  
+
   <% @project.builds.recent_first.each do |build| %>
     <tr class="build-status-line">
       <td class="build-info"><%= build_information build %></td>
@@ -33,7 +33,7 @@
 <%= form_for [@project, @new_build] do |f| %>
   <%= f.submit 'Request a build' %>
 <% end %>
-  
+
 <%= render :partial => 'commands/list' %>
 
 <h2 class="section">Project settings</h2>
@@ -44,6 +44,14 @@
 <p>
   <b>Source:</b>
   <%= @project.source %>
+</p>
+<p>
+  <b>Branch:</b>
+  <%= @project.branch %>
+</p>
+<p>
+  <b>Location for shared files:</b>
+  <%= @project.folder_path+"/shared" %>
 </p>
 <p>
   <b>Recentizer&#153; 3000 Pro:</b>
