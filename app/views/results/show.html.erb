@@ -1,0 +1,17 @@
+<h2><%= @project.name %>: Build results</h2>
+<table>
+  <tr>
+    <th class="build-id">Build</th>
+    <% @project.commands.each do |command| %>
+      <th><%= command.name %></th>
+    <% end %>
+  </tr>
+  <tr class="build-status-line">
+    <td class="build-info"><%= build_information @build %></td>
+    <%= build_results_in_tds @build %>
+  </tr>
+</table>
+
+<h2>Log: <%= @result.command.name %></h2>
+<p>Started at: <%= @result.start_time %> - Ended at: <%= @result.end_time %></p>
+<%= (escape_to_html(@result.log)).html_safe %>

@@ -1,13 +1,14 @@
 Beci::Application.routes.draw do
-  resources :branches
 
-  resources :projects do  
+  resources :projects do
     resources :commands, :except => [:show, :index]
-    resources :builds, :only => :create
+    resources :builds, :only => [:create, :destroy] do
+      resources :results, :only => :show
+    end
   end
-  
+
   mount Resque::Server, :at => "/resque"
-  
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

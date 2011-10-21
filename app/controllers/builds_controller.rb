@@ -16,4 +16,17 @@ class BuildsController < ApplicationController
       end
     end
   end
+
+  def destroy
+    @build = Build.find(params[:id])
+
+    if @build.destroy
+      flash[:notice] = "Build successfully deleted."
+      redirect_to project_path(@build.project)
+    else
+      flash[:error] = "Error deleting build."
+      redirect_to project_path(@build.project)
+    end
+  end
+
 end

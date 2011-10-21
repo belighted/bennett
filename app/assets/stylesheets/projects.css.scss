@@ -32,6 +32,15 @@ td.build-info {
   padding-right: 100px;
 }
 
+td.result-cell {
+	text-align: center;
+}
+
+td.build-info-result {
+	background: #ccf;
+	padding: 2px 50px;
+}
+
 .commit-message {
   font-weight: bold;
 }

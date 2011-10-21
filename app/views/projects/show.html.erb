@@ -10,22 +10,26 @@
 <% end %>
 
 <h2>Build results</h2>
-<% if @project.builds.any? %>
+<% if @builds.any? %>
   <table>
     <tr>
       <th class="build-id">Build</th>
+      <th>Final result</th>
       <% @project.commands.each do |command| %>
         <th><%= command.name %></th>
       <% end %>
     </tr>
 
-  <% @project.builds.recent_first.each do |build| %>
+  <% @builds.recent_first.each do |build| %>
     <tr class="build-status-line">
       <td class="build-info"><%= build_information build %></td>
+			<td class="result-cell build-info-result"><span class="status-<%= build.status.to_s %>"><%= build.status %><span></td>
       <%= build_results_in_tds build %>
+      <td><%= link_to "Delete", [@project, build], :confirm => "Are you sure you want to delete this build?", :method => :delete %></td>
     </tr>
   <% end %>
   </table>
+	<p><%= will_paginate @builds %></p>
 <% else %>
   No builds yet... Click below to request one!
 <% end %>

@@ -1,6 +1,6 @@
 class Build < ActiveRecord::Base
   belongs_to :project
-  has_many :results, :autosave => true
+  has_many :results, :autosave => true, :dependent => :destroy
 
   scope :recent_first, order('created_at DESC')
 
@@ -51,17 +51,31 @@ class Build < ActiveRecord::Base
     end
   end
 
-  def build!
-    results.each do |result|
-      result.update_attribute :status_id, 'busy'
+  def update_commit!
+    git = Git.open(project.folder_path)
+    git.reset_hard
+    git.checkout(project.branch)
+    git.pull
+    git.checkout(commit_hash)
+  end
 
-      res = system("[[ -s \"$HOME/.rvm/scripts/rvm\" ]] && source \"$HOME/.rvm/scripts/rvm\"; cd #{project.folder_path}; #{result.command.command}")
-      puts "[[ -s \"$HOME/.rvm/scripts/rvm\" ]] && source \"$HOME/.rvm/scripts/rvm\"; cd #{project.folder_path}; #{result.command.command}"
-      if res
-        result.update_attribute :status_id, 'passed'
+  def build!
+    update_commit!
+    results.each do |result|
+      result.update_attribute :start_time, Time.now
+      if status == :failed
+        result.update_attribute :status_id, Result::STATUS[:skipped]
       else
-        result.update_attribute :status_id, 'failed'
+        result.update_attribute :status_id, Result::STATUS[:busy]
+        output = `unset RUBYOPT; unset BUNDLE_GEMFILE; unset BUNDLE_BIN_PATH; [[ -s \"$HOME/.rvm/scripts/rvm\" ]] && source \"$HOME/.rvm/scripts/rvm\"; cd #{project.folder_path}; #{result.command.command} 2>&1`
+        result.update_attribute :log, output
+        if $?.success?
+          result.update_attribute :status_id, Result::STATUS[:passed]
+        else
+          result.update_attribute :status_id, Result::STATUS[:failed]
+        end
       end
+      result.update_attribute :end_time, Time.now
     end
   end
 
