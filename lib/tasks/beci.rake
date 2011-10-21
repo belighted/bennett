@@ -17,7 +17,7 @@ namespace :beci do
     end
     
     # Build workers
-    workers = ENV['WORKERS'].to_i || 1
+    workers = ENV['WORKERS'].present? ? ENV['WORKERS'].to_i : 1
     workers.times do
       fork do
         system "rake resque:work QUEUE='*' RAILS_ENV=#{env}"
