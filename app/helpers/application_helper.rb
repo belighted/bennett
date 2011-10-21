@@ -28,7 +28,7 @@ module ApplicationHelper
         data.gsub!(/\e\[#{key}m/,"<span>")
       end
     end
-    data.gsub!(/\e\[0m/,'<\span>')
+    data.gsub!(/\e\[0m/,'</span>')
     return data.gsub("\n", "<br/>")
   end
 
