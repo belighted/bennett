@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @project = Project.find(params[:id])
-    @builds = @project.builds.paginate(:per_page => 5, :page => params[:page])
+    @builds = @project.builds.paginate(:per_page => 5, :page => params[:page], :order => 'created_at DESC')
     @new_build = Build.new
 
     respond_to do |format|

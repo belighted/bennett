@@ -1,0 +1,6 @@
+<tr class="build-status-line" id="<%= build.id %>">
+  <td class="build-info"><%= build_information build %></td>
+	<td class="result-cell build-info-result"><span class="status-<%= build.status.to_s %>"><%= build.status %><span></td>
+  <%= build_results_in_tds build %>
+  <td><%= link_to "Delete", [@project, build], :confirm => "Are you sure you want to delete this build?", :method => :delete %></td>
+</tr>

@@ -7,6 +7,8 @@ Beci::Application.routes.draw do
     end
   end
 
+  resources :builds, :only => [:index]
+
   mount Resque::Server, :at => "/resque"
 
   # The priority is based upon order of creation:

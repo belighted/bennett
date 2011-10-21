@@ -1,0 +1,19 @@
+<div id="builds-list">
+  <% if builds.any? %>
+    <table>
+      <tr>
+        <th class="build-id">Build</th>
+        <th>Final result</th>
+        <% @project.commands.each do |command| %>
+          <th><%= command.name %></th>
+        <% end %>
+      </tr>
+
+    <% builds.each do |build| %>
+      <%= render :partial => build %>
+    <% end %>
+    </table>
+  <% else %>
+    No builds yet... Click below to request one!
+  <% end %>
+</div>
