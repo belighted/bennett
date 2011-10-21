@@ -1,6 +1,6 @@
 namespace :beci do
-  desc "Start the BeCI server"
-  task :start, :workers do |t, args|
+  desc "Run the BeCI server"
+  task :run, :workers do |t, args|
     # Redis server
     fork do 
       system "redis-server"
@@ -21,6 +21,7 @@ namespace :beci do
     
     # Rails server
     env = ENV['RAILS_ENV'] || 'production'
+    system "rake db:migrate RAILS_ENV=#{env}"
     system "rake assets:precompile RAILS_ENV=#{env}"
     system "rails server -e #{env}"
   end
