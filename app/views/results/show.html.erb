@@ -4,5 +4,5 @@
 <h2>Log: <%= @result.command.name %></h2>
 <p>Started at: <%= @result.start_time %> - Ended at: <%= @result.end_time %></p>
 <div class="log">
-  <%= (escape_to_html(@result.log)).html_safe %>
+  <%= escape_to_html @result.log %>
 </div>

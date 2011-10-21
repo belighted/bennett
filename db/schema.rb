@@ -34,7 +34,6 @@ ActiveRecord::Schema.define(:version => 20111018145539) do
 
   create_table "projects", :force => true do |t|
     t.string   "name"
-    t.string   "source"
     t.boolean  "recentizer"
     t.string   "branch"
     t.string   "folder_path"
@@ -45,7 +44,7 @@ ActiveRecord::Schema.define(:version => 20111018145539) do
   create_table "results", :force => true do |t|
     t.integer  "build_id"
     t.integer  "command_id"
-    t.string   "log"
+    t.string   "log_path"
     t.string   "status_id"
     t.datetime "start_time"
     t.datetime "end_time"

@@ -13,7 +13,7 @@ module BuildsHelper
   def build_results_in_tds(build)
     build.results.collect do |result|
       content_tag :td, :class => "result-cell" do
-        content_tag :span, ['passed', 'failed'].include?(result.status.to_s) ? link_to(result.status, [build.project, build, result]) : result.status , :class => "status-#{result.status.to_s}"
+        content_tag :span, [:busy, :passed, :failed].include?(result.status) ? link_to(result.status, [build.project, build, result]) : result.status , :class => "status-#{result.status.to_s}"
       end
     end.join.html_safe
   end

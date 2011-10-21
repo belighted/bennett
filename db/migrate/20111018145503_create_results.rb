@@ -3,7 +3,7 @@ class CreateResults < ActiveRecord::Migration
     create_table :results do |t|
       t.integer :build_id
       t.integer :command_id
-      t.text :log
+      t.string :log_path
       t.string :status_id
       t.datetime :start_time
       t.datetime :end_time

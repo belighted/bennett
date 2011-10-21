@@ -29,7 +29,7 @@ module ApplicationHelper
       end
     end
     data.gsub!(/\e\[0m/,'</span>')
-    return data.gsub("\n", "<br/>")
+    data.gsub("\n", "<br/>").html_safe
   end
 
 end

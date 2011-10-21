@@ -15,6 +15,7 @@ class Result < ActiveRecord::Base
   before_create :set_defaults
   def set_defaults
     self.status_id = STATUS[:pending]
+    self.log_path = "#{Rails.root}/log/build_#{build.project.name.parameterize('_')}_#{build.id}_#{command.name.parameterize('_')}.log"
   end
   
   scope :recent_first, order('end_time DESC')
@@ -54,5 +55,9 @@ class Result < ActiveRecord::Base
   
   def skipped?
     in_status? :skipped
+  end
+  
+  def log
+    File.read log_path
   end
 end

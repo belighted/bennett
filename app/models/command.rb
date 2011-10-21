@@ -2,6 +2,7 @@ class Command < ActiveRecord::Base
   belongs_to :project
   
   validates :position, :presence => true
+  validates :name, :presence => true
   
   before_validation :set_default_position, :on => :create
   
