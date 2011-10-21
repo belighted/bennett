@@ -21,7 +21,7 @@ namespace :beci do
     
     # Rails server
     env = ENV['RAILS_ENV'] || 'production'
-    system "rake assets:precompile"
+    system "rake assets:precompile RAILS_ENV=#{env}"
     system "rails server -e #{env}"
   end
 end
