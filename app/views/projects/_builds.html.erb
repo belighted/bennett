@@ -1,19 +1,13 @@
-<div id="builds-list">
-  <% if builds.any? %>
-    <table>
-      <tr>
-        <th class="build-id">Build</th>
-        <th>Final result</th>
-        <% @project.commands.each do |command| %>
-          <th><%= command.name %></th>
-        <% end %>
-      </tr>
+<% if builds.any? %>
+  <table>
+    <%= render partial: 'builds/header' %>
+    <%= render partial: builds %>
+  </table>
+<% else %>
+  No builds yet... Click below to request one!
+<% end %>
+<p><%= will_paginate builds, :params => {:format => :html} %></p>
 
-    <% builds.each do |build| %>
-      <%= render :partial => build %>
-    <% end %>
-    </table>
-  <% else %>
-    No builds yet... Click below to request one!
-  <% end %>
-</div>
+<%= form_for [@project, @new_build], remote: true do |f| %>
+  <%= f.submit 'Request a build', onclick: '$(this).submit().attr("value", "Please wait...").attr("disabled", true);' %>
+<% end %>

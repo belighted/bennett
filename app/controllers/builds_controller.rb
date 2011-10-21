@@ -28,19 +28,4 @@ class BuildsController < ApplicationController
       redirect_to project_path(@build.project)
     end
   end
-
-  def index
-    if params[:page].present? || params[:builds].present?
-      @project = Build.find(params[:builds].first).project
-      if params[:page].blank?
-        @builds = Build.recent_first.find(params[:builds])
-      else
-        @builds = @project.builds.paginate(:per_page => 5, :page => params[:page], :order => 'created_at DESC')
-      end
-    else
-      @builds = []
-    end
-    render :partial => 'projects/builds', :locals => {:builds => @builds}
-  end
-
 end

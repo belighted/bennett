@@ -51,3 +51,16 @@ td, th {
 table {
   border-collapse: collapse;
 }
+
+#autoreload-status {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background: #fff;
+  padding: 0 5px;
+}
+
+#autoreload-status.loading {
+  background: url('/assets/ajax-loader.gif') left center no-repeat;
+  padding-left: 20px;
+}

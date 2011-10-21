@@ -3,8 +3,9 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.json { render json: @projects }
+      format.js { render partial: @projects }
     end
   end
 
@@ -12,12 +13,13 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @project = Project.find(params[:id])
-    @builds = @project.builds.paginate(:per_page => 5, :page => params[:page], :order => 'created_at DESC')
+    @builds = @project.builds.paginate(per_page: 5, page: params[:page], order: 'created_at DESC')
     @new_build = Build.new
 
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @project }
+      format.js { render partial: 'projects/builds', locals: {builds: @builds} }
     end
   end
 

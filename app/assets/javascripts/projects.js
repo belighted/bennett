@@ -1,14 +1,8 @@
-function reload_builds(){
-	var builds = $.map($('.build-status-line'), function(e){ return e.id })
-	var page = $('.pagination .current').text()
-  $.ajax({
-    url: "/builds",
-    data: { builds: builds, page: page },
-    dataType: 'html',
-    success: function(data, textStatus) {
-	    $('#builds-list').html(data);
-    }
-  });
+function reload_projects(params){
+  reload_resource("/projects.js", "#projects-summary", params);
 }
 
-setInterval(reload_builds, 2000);
+function reload_builds(params){
+  var url = "/projects/"+params["id"]+".js";
+  reload_resource(url, "#builds-list", params);
+}

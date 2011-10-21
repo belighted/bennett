@@ -1,0 +1,7 @@
+<tr>
+  <th class="build-id">Build</th>
+  <th>Final result</th>
+  <% @project.commands.each do |command| %>
+    <th><%= command.name %></th>
+  <% end %>
+</tr>

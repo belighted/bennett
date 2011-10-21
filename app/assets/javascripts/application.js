@@ -7,3 +7,20 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+function reload_resource(url, element, params){
+  setInterval(function(){
+    $("#autoreload-status").addClass("loading");
+    $.ajax({
+      url: url,
+      data: params,
+      dataType: "html",
+      ifModified: true,
+      success: function(data, textStatus) {
+        if(textStatus=="success") $(element).html(data);
+        $("#autoreload-status").html("refreshed at "+new Date().toTimeString().split(" ")[0]);
+        $("#autoreload-status").removeClass("loading");
+      }
+    });
+  }, 2000);
+}

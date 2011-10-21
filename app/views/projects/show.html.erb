@@ -10,14 +10,11 @@
 <% end %>
 
 <h2>Build results</h2>
-<%= render :partial => 'builds', :locals => {:builds => @builds } %>
-<p><%= will_paginate @builds %></p>
+<div id="builds-list">
+  <%= render partial: 'builds', locals: {builds: @builds } %>
+</div>
 
-<%= form_for [@project, @new_build], :remote => true do |f| %>
-  <%= f.submit 'Request a build' %>
-<% end %>
-
-<%= render :partial => 'commands/list' %>
+<%= render partial: 'commands/list' %>
 
 <h2 class="section">Project settings</h2>
 <p>
@@ -40,4 +37,8 @@
   <b>Post-Receive URL for Git hook:</b>
   <%= "/projects/#{@project.id}/builds" %>
 </p>
-<%= link_to 'Edit', edit_project_path(@project) %> | <%= link_to "Delete", @project, :confirm => "Are you sure you want to delete this project and all these builds and commands?", :method => :delete %>
+<%= link_to 'Edit', edit_project_path(@project) %> | <%= link_to "Delete", @project, confirm: "Are you sure you want to delete this project and all these builds and commands?", method: :delete %>
+
+<script type="text/javascript">
+  reload_builds(<%= params.to_json.html_safe %>);
+</script>

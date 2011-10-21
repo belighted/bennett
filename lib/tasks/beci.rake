@@ -4,7 +4,7 @@ namespace :beci do
     # Prepare
     env = ENV['RAILS_ENV'] || 'production'
     system "rake db:migrate RAILS_ENV=#{env}"
-    system "rake assets:precompile RAILS_ENV=#{env}"
+    system "rake assets:precompile RAILS_ENV=#{env}" unless env=="development"
     
     # Redis server
     fork do 

@@ -3,11 +3,11 @@
     <th>Project</th>
     <th>Last status</th>
   </tr>
-
-<% @projects.each do |project| %>
-  <tr>
-    <td><%= link_to project.name, project %></td>
-    <td><%= status_for_project project %></td>
-  </tr>
-<% end %>
+  <tbody id="projects-summary">
+    <%= render partial: @projects %>
+  </tbody>
 </table>
+
+<script type="text/javascript">
+  reload_projects(<%= params.to_json.html_safe %>);
+</script>
