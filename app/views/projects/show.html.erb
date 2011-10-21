@@ -57,4 +57,4 @@
   <b>Recentizer&#153; 3000 Pro:</b>
   <%= @project.recentizer? ? 'On' : 'Off' %>
 </p>
-<%= link_to 'Edit', edit_project_path(@project) %>
+<%= link_to 'Edit', edit_project_path(@project) %> | <%= link_to "Delete", @project, :confirm => "Are you sure you want to delete this project and all these builds and commands?", :method => :delete %>

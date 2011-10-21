@@ -1,6 +1,6 @@
 class Project < ActiveRecord::Base
-  has_many :builds
-  has_many :commands
+  has_many :builds, :dependent => :destroy
+  has_many :commands, :dependent => :destroy
   accepts_nested_attributes_for :commands
 
   validate :unique_command_positions
