@@ -13,7 +13,7 @@ module BuildsHelper
   def build_results_in_tds(build)
     build.results.collect do |result|
       content_tag :td, :class => "result-cell" do
-        content_tag :span, [:busy, :passed, :failed].include?(result.status) ? link_to(result.status, [build.project, build, result]) : result.status , :class => "status-#{result.status.to_s}"
+        content_tag :span, [:busy, :passed, :failed].include?(result.status) ? link_to(status_image(result.status), [build.project, build, result]) : status_image(result.status) , :class => "status"
       end
     end.join.html_safe
   end
@@ -27,5 +27,13 @@ module BuildsHelper
     start_time = build.start_time.to_s || ""
     end_time = build.end_time.to_s || ""
     content_tag(:span, ("Started at: " + start_time + " - Ended at: " + end_time ))
+  end
+  
+  def status_image(status)
+    format = case status
+      when :busy then 'gif'
+      else 'png'
+    end
+    image_tag "/assets/#{status}.#{format}", alt: status.to_s, title: status.to_s
   end
 end

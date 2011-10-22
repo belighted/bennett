@@ -41,7 +41,7 @@ td, th {
   font-style: italic;
 }
 
-#admin-tab {
+#queues-tab {
 	position: absolute;
 	right: 0;
 	top: 0;
@@ -61,6 +61,6 @@ table {
 }
 
 #autoreload-status.loading {
-  background: url('/assets/ajax-loader.gif') left center no-repeat;
+  background: url('/assets/refresh.gif') left center no-repeat #fff;
   padding-left: 20px;
 }
