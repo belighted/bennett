@@ -65,7 +65,7 @@ class ProjectsController < ApplicationController
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
         format.json { head :ok }
       else
-        format.html { render action: "show" }
+        format.html { params[:project][:commands_attributes].present? ? redirect_to(@project) : render(action: "edit") }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end

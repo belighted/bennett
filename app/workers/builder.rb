@@ -1,6 +1,6 @@
 class Builder
   def self.enqueue(build)
-    queue_name = 'Builder: '+build.project.name
+    queue_name = 'Builder for '+build.project.name
     Resque::Job.create(queue_name, self, build.id)
   end
 

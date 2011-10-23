@@ -1,30 +1,31 @@
 namespace :beci do
   desc "Run the BeCI server"
-  task :run, :workers do |t, args|
-    # Prepare
+  task :run do
+    # Redis server
+    fork do 
+      system "redis-server config/redis.conf"
+    end
+     
+    # Rails server
     env = ENV['RAILS_ENV'] || 'production'
     system "rake db:migrate RAILS_ENV=#{env}"
     system "rake assets:precompile RAILS_ENV=#{env}" unless env=="development"
-    
-    # Redis server
-    fork do 
-      system "redis-server"
-    end
-    
-    # Git worker
     fork do
-      system "rake resque:work QUEUE='Commits Fetcher' RAILS_ENV=#{env}"
+      system "rails server -e #{env}"
     end
-    
-    # Build workers
-    workers = ENV['WORKERS'].present? ? ENV['WORKERS'].to_i : 1
-    workers.times do
-      fork do
-        system "rake resque:work QUEUE='*' RAILS_ENV=#{env}"
+
+    # Workers
+    worked_queues = []
+    while true do 
+      unworked_queues = Resque.queues - worked_queues
+      unworked_queues.each do |q_name|
+        fork do
+          system "rake resque:work QUEUE='#{q_name}' RAILS_ENV=#{env}"
+        end
+        worked_queues << q_name
+        puts "[BeCI] Spawing worker for queue: #{q_name}"
       end
+      sleep 5
     end
-    
-    # Rails server
-    system "rails server -e #{env}"
   end
 end

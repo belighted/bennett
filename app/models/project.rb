@@ -3,6 +3,7 @@ class Project < ActiveRecord::Base
   has_many :commands, :dependent => :destroy
   accepts_nested_attributes_for :commands
 
+  validates :folder_path, :uniqueness => true
   validate :unique_command_positions
 
   def last_build
