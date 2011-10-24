@@ -68,9 +68,10 @@ class Build < ActiveRecord::Base
       else
         result.update_attribute :status_id, Result::STATUS[:busy]
         commands = [ 'unset RAILS_ENV RUBYOPT BUNDLE_GEMFILE BUNDLE_BIN_PATH',
-                     '([[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm")',
+                     '[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"',
                      "cd #{project.folder_path}",
                      "#{result.command.command}" ]
+        p "#{commands.join(';')} > #{result.log_path} 2>&1"
         res = system "#{commands.join(';')} > #{result.log_path} 2>&1"
         if res
           result.update_attribute :status_id, Result::STATUS[:passed]

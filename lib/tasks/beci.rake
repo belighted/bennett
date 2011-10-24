@@ -2,8 +2,8 @@ namespace :beci do
   desc "Run the BeCI server"
   task :run do
     # Redis server
-    fork do 
-      system "redis-server config/redis.conf"
+    fork do
+      system "rm dump.rdb; redis-server"
     end
      
     # Rails server
