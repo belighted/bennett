@@ -1,0 +1,14 @@
+- if flash[:success]
+  .alert-message.success.fade.in
+    %a.close{ :href => "#" } ×
+    %p= flash[:success]
+
+- if flash[:error]
+  .alert-message.error.fade.in
+    %a.close{ :href => "#" } ×
+    %p= flash[:error]
+
+- if flash[:info]
+  .alert-message.info.fade.in
+    %a.close{ :href => "#" } ×
+    %p= flash[:info]

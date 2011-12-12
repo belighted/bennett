@@ -1,0 +1,11 @@
+.topbar
+  .topbar-inner
+    .container-fluid
+      = link_to "Beci", projects_path, :class => :brand
+      %ul.nav
+        %li{ :class => ("active" if current_project.nil?) }=link_to "All projects", projects_path
+        - projects.each do |project|
+          %li{ :class => ('active' if current_project && project == current_project) }
+            = link_to project.name, project
+      %ul.nav.secondary-nav
+        %li= link_to "Queues", "/resque", :class => "pull-right", :target => :_blank

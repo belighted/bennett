@@ -1,9 +1,0 @@
-<h2><%= @project.name %>: Build results</h2>
-
-<div id="result-details">
-  <%= render partial: @result %>
-</div>
-
-<script type="text/javascript">
-  reload_result(<%= params.to_json.html_safe %>);
-</script>

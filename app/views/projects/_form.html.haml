@@ -1,0 +1,20 @@
+= form_for project do |form|
+  - form.labeled_input :name do
+    = form.label :name
+    .input
+      = form.text_field :name
+  - form.labeled_input :folder_path do
+    = form.label :folder_path, "Location"
+    .input
+      = form.text_field :folder_path
+  - form.labeled_input :branch do
+    = form.label :branch
+    .input
+      = form.text_field :branch
+  - form.labeled_input :recentizer do
+    = form.label :recentizer
+    .input
+      = form.check_box :recentizer
+      %span.help-block Only process most recent build (Recentizer&#153; 3000 Pro)
+  .actions
+    = form.submit "Save the project", :class => "btn"

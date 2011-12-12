@@ -5,6 +5,7 @@ class Project < ActiveRecord::Base
 
   validates :folder_path, :uniqueness => true
   validate :unique_command_positions
+  validates_presence_of :name, :folder_path, :branch
 
   def last_build
     builds.last

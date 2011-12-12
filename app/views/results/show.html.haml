@@ -1,0 +1,7 @@
+%h2= "#{@project.name}: Build results"
+#result-details
+  = render partial: @result
+
+%script{:type => "text/javascript", :charset => "utf-8"}
+  = "results = new Results();"
+  = "results.reload(#{ params.to_json });".html_safe

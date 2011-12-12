@@ -1,0 +1,29 @@
+%h2 Build commands
+- if @project.commands.any?
+  = form_for @project do |f|
+    %table.condensed-table.bordered-table
+      %thead
+        %tr
+          %th Order
+          %th Name
+          %th Command
+          %th Actions
+      %tbody
+        = f.fields_for :commands do |cf|
+          %tr
+            %td{ :width => "10px" }= cf.text_field :position, :class => :span1
+            %td
+              %strong= cf.object.name
+            %td
+              %em= cf.object.command
+            %td
+              = link_to 'Edit', edit_project_command_path(@project, cf.object), :class => "btn"
+              = link_to 'Remove', project_command_path(@project, cf.object), :method => :delete, :confirm => 'Are you sure?', :class => "btn danger"
+        %tr
+          %td= f.submit 'Save', :class => "btn"
+          %td
+          %td
+          %td= link_to 'Add', new_project_command_path(@project), :class => "btn success"
+- else
+  %p No commands configured yet...
+  = link_to 'Add one to get started!', new_project_command_path(@project), :class => "btn success"

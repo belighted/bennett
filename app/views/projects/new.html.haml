@@ -1,0 +1,6 @@
+%h2 New project
+
+= link_to 'Back to the project list', projects_path, :class => :back
+
+= render :partial => "form", :locals => { :project => @project }
+

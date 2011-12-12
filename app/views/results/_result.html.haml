@@ -1,0 +1,8 @@
+%table.condensed-table.zebra-striped.bordered-table
+  = render partial: 'builds/header'
+  = render partial: @build
+
+%h2="Log: #{@result.command.name}"
+%p="Started at: #{@result.start_time} - Ended at: #{@result.end_time}"
+.log
+  = escape_to_html @result.log

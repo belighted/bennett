@@ -1,0 +1,5 @@
+%h2 Editing project
+
+= link_to 'Back to the project page', @project, :class => :back
+
+= render :partial => "form", :locals => { :project => @project }
