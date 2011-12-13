@@ -11,7 +11,7 @@ class window.Resource
           success: (data, textStatus) ->
             if(textStatus == "success")
               $(element).html(data)
-            $("#autoreload-status").html("refreshed at "+new Date().toTimeString().split(" ")[0])
+            $("#autoreload-status").html("Refreshed at "+new Date().toTimeString().split(" ")[0])
             $("#autoreload-status").removeClass("loading")
       ,
       2000

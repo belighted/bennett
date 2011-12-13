@@ -9,8 +9,9 @@
     = render partial: 'layouts/header', locals: { projects: @projects, current_project: @project }
     .container-fluid
       .content
-        %span#autoreload-status
+
         = render partial: "layouts/flashes"
         = yield
     %footer
+      %p#autoreload-status.pull-right
       %p &copy; Belighted 2011
