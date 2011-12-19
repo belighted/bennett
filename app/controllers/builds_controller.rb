@@ -6,19 +6,22 @@ class BuildsController < ApplicationController
     @build = @project.builds.new(params[:build])
 
     respond_to do |format|
-      if @build.save
-        Resque.enqueue(CommitsFetcher, @build.id)
-        format.html { redirect_to @project, notice: 'Build successfully added to queue.' }
-        format.json { render json: @build, status: :created, location: @build }
-      else
-        format.html { redirect_to @project, notice: 'Error adding build.' }
-        format.json { render json: @build.errors, status: :unprocessable_entity }
+      if @build.new_activity?
+        if @build.save
+          Resque.enqueue(CommitsFetcher, @build.id)
+          format.html { redirect_to @project, notice: 'Build successfully added to queue.' }
+          format.json { render json: @build, status: :created, location: @build }
+        else
+          format.html { redirect_to @project, notice: 'Error adding build.' }
+          format.json { render json: @build.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
 
   def destroy
     @build = Build.find(params[:id])
+    Builder.dequeue(build)
 
     if @build.destroy
       flash[:notice] = "Build successfully deleted."

@@ -5,6 +5,7 @@ class Builder
   end
 
   def self.perform(build_id)
+    ActiveRecord::Base.reconnect!
     build = Build.find(build_id)
     if build.project.recentizer? && build.project.last_build != build
       build.skip!
@@ -12,4 +13,10 @@ class Builder
       build.build!
     end
   end
+
+  def self.dequeue(build)
+    queue_name = 'Builder for '+build.project.name
+    Resque::Job.destroy(queue_name, self, build.id)
+  end
+
 end

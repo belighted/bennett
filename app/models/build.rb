@@ -95,4 +95,11 @@ class Build < ActiveRecord::Base
     self.commit_date = commit.date
     save!
   end
+
+  def new_activity?
+    git = Git.open(project.folder_path)
+    res = git.fetch
+    res.include?(project.branch)
+  end
+
 end
