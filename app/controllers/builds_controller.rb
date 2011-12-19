@@ -22,7 +22,6 @@ class BuildsController < ApplicationController
 
   def destroy
     @build = Build.find(params[:id])
-    Builder.dequeue(build)
 
     if @build.destroy
       flash[:notice] = "Build successfully deleted."

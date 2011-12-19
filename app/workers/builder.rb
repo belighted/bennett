@@ -14,9 +14,4 @@ class Builder
     end
   end
 
-  def self.dequeue(build)
-    queue_name = 'Builder for '+build.project.name
-    Resque::Job.destroy(queue_name, self, build.id)
-  end
-
 end
