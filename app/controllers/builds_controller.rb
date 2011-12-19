@@ -4,9 +4,10 @@ class BuildsController < ApplicationController
   def create
     @project = Project.find(params[:project_id])
     @build = @project.builds.new(params[:build])
+    @manual = params[:manual]
 
     respond_to do |format|
-      if @build.new_activity?
+      if @manual || @build.new_activity?
         if @build.save
           Resque.enqueue(CommitsFetcher, @build.id)
           format.html { redirect_to @project, notice: 'Build successfully added to queue.' }
