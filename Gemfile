@@ -11,6 +11,8 @@ gem 'haml',          '3.1.4'
 gem 'hpricot',       '0.8.5'
 
 group :development do
+  gem 'capistrano', '2.9.0'
+  gem 'capistrano_colors', '0.5.5'
   gem 'mongrel', '1.2.0.pre2'
 end
 
