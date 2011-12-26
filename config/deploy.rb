@@ -7,8 +7,10 @@ set :scm,               :git
 set :deploy_via,        :remote_cache
 set :branch,            "master"
 set :user,              "nja"
-set :deploy_to,         "/Users/nja/Sites"
+set :deploy_to,         "/Users/nja/Sites/beci"
 set :rails_env,         "production"
+set :ssh_options, {:forward_agent => true}
+set :use_sudo, false
 
 
 role :web, "192.168.1.99"                          # Your HTTP server, Apache/etc
