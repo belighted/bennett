@@ -82,6 +82,7 @@ class Build < ActiveRecord::Base
       end
       result.update_attribute :end_time, Time.now
     end
+    CiMailer.build_result(self).deliver
   end
 
   def fetch_commit!
@@ -92,6 +93,7 @@ class Build < ActiveRecord::Base
     self.commit_hash = commit.sha
     self.commit_message = commit.message
     self.commit_author = commit.author.name
+    self.commit_author_email = commit.author.email
     self.commit_date = commit.date
     save!
   end
@@ -100,6 +102,12 @@ class Build < ActiveRecord::Base
     git = Git.open(project.folder_path)
     res = git.fetch
     res.include?(project.branch)
+  end
+
+  def delete_jobs_in_queues
+    Resque.dequeue(CommitsFetcher, id)
+    queue_name = 'Builder for '+ project.name
+    Resque::Job.destroy(queue_name, Builder, id)
   end
 
 end

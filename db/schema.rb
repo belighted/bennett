@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111018145539) do
+ActiveRecord::Schema.define(:version => 20111226083307) do
 
   create_table "builds", :force => true do |t|
     t.integer  "project_id"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20111018145539) do
     t.datetime "commit_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "commit_author_email"
   end
 
   create_table "commands", :force => true do |t|

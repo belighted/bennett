@@ -22,7 +22,7 @@ class BuildsController < ApplicationController
 
   def destroy
     @build = Build.find(params[:id])
-
+    @build.delete_jobs_in_queues
     if @build.destroy
       flash[:notice] = "Build successfully deleted."
       redirect_to project_path(@build.project)
