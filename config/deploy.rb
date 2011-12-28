@@ -11,6 +11,8 @@ set :deploy_to,         "/Users/nja/Sites/beci"
 set :rails_env,         "production"
 set :ssh_options,       {:forward_agent => true}
 set :use_sudo,          false
+load "deploy/assets"
+set :normalize_asset_timestamps, false
 
 set :rvm_path,              "/Users/nja/.rvm/"
 $:.unshift(File.expand_path('./lib', ENV['rvm_path']))
@@ -29,6 +31,15 @@ after "deploy", "rvm:trust_rvmrc"
 
 # Symplinks, cron & db dump
 after "deploy:update_code", "deploy:symlink_directories_and_files"
+after "deploy:symlink_directories_and_files", "deploy:restart_workers"
+
+def run_remote_rake(rake_cmd)
+  rake_args = ENV['RAKE_ARGS'].to_s.split(',')
+  cmd = "cd #{fetch(:latest_release)} && #{fetch(:rake, "rake")} RAILS_ENV=#{fetch(:rails_env, "production")} #{rake_cmd}"
+  cmd += "['#{rake_args.join("','")}']" unless rake_args.empty?
+  run cmd
+  set :rakefile, nil if exists?(:rakefile)
+end
 
 namespace :deploy do
   task :start do ; end
@@ -39,8 +50,13 @@ namespace :deploy do
 
   desc 'Symlink shared directories and files'
   task :symlink_directories_and_files do
-    run "ln -s #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-    run "ln -s #{shared_path}/db/production.sqlite3 #{release_path}/db/production.sqlite3"
+    run "ln -s #{shared_path}/database.yml #{release_path}/config/database.yml"
+    run "ln -s #{shared_path}/production.sqlite3 #{release_path}/db/production.sqlite3"
+  end
+
+  desc "Restart Resque Workers"
+  task :restart_workers, :roles => :db do
+    run_remote_rake "workers:restart_workers"
   end
 
 end
