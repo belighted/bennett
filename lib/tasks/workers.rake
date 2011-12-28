@@ -17,8 +17,8 @@ namespace :workers do
 
   desc "Restart running workers"
   task :restart_workers => :environment do
-    Rake::Task['resque:stop_workers'].invoke
-    Rake::Task['resque:start_workers'].invoke
+    Rake::Task['workers:stop_workers'].invoke
+    Rake::Task['workers:start_workers'].invoke
   end
 
   desc "Quit running workers"
