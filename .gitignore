@@ -11,7 +11,6 @@ config/*.sphinx.conf
 capybara*
 pickle-email*
 vendor/plugins/rails_upgrade/*
-.rvmrc
 
 # Ignore all backup files
 *~
