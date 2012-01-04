@@ -5,4 +5,7 @@
 %h2="Log: #{@result.command.name}"
 %p="Started at: #{@result.start_time} - Ended at: #{@result.end_time}"
 .log
-  = escape_to_html @result.log
+  - if File.exists?(@result.log_path)
+    = escape_to_html @result.log
+  - else
+    = No log file
