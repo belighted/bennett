@@ -9,6 +9,7 @@ gem 'jquery-rails',  '1.0.19'
 gem 'notifier',      '0.1.4'
 gem 'haml',          '3.1.4'
 gem 'hpricot',       '0.8.5'
+gem 'unicorn'
 
 group :development do
   gem 'capistrano', '2.9.0'
