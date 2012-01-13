@@ -69,7 +69,7 @@ class Build < ActiveRecord::Base
         result.update_attribute :status_id, Result::STATUS[:busy]
         commands = [ 'unset RAILS_ENV RUBYOPT BUNDLE_GEMFILE BUNDLE_BIN_PATH',
                      '[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"',
-                     '[[ -s "$HOME/.rbenv/bin/rbenv" ]] && export PATH="$HOME/.rbenv/bin:$PATH"; eval "$(rbenv init -)"',
+                     '[[ -s "$HOME/.rbenv/bin/rbenv" || -s "/usr/local/bin/rbenv" ]] && export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"; eval "$(rbenv init -)"',
                      "cd #{project.folder_path}",
                      "#{result.command.command}" ]
         p "#{commands.join(';')} > #{result.log_path} 2>&1"
