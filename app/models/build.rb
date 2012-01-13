@@ -72,8 +72,9 @@ class Build < ActiveRecord::Base
                      '[[ -s "$HOME/.rbenv/bin/rbenv" || -s "/usr/local/bin/rbenv" ]] && export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"; eval "$(rbenv init -)"',
                      "cd #{project.folder_path}",
                      "#{result.command.command}" ]
-        p "#{commands.join(';')} > #{result.log_path} 2>&1"
-        res = system "#{commands.join(';')} > #{result.log_path} 2>&1"
+        cmd = "#{commands.join(';')} >> #{result.log_path} 2>&1"
+        File.open(result.log_path, 'w') {|f| f.write(cmd) }
+        res = system cmd
         if res
           result.update_attribute :status_id, Result::STATUS[:passed]
         else
