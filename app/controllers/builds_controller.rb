@@ -1,4 +1,6 @@
 class BuildsController < ApplicationController
+  skip_before_filter :authenticate, :only => :create
+
   # POST /builds
   # POST /builds.json
   def create
