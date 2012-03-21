@@ -1,7 +1,7 @@
 require 'capistrano_colors'
 
 set :application,       "beci"
-set :repository,        "git@github.com:belighted/beci.git"
+set :repository,        "git@git.belighted.com:beci.git"
 set :scm,               :git
 set :deploy_via,        :remote_cache
 set :branch,            "master"
