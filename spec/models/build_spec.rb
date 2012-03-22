@@ -2,32 +2,23 @@ require 'spec_helper'
 
 describe Build do
   it "has status passed if all results passed" do
-    result_1 = stub_model Result
-    result_2 = stub_model Result
-    result_1.stub(:status_id).and_return(Result::STATUS[:passed])
-    result_2.stub(:status_id).and_return(Result::STATUS[:passed])
-    build = Build.new
-    build.stub(:results).and_return([result_1, result_2])
+    result_1 = stub_model Result, status_id: Result::STATUS[:passed]
+    result_2 = stub_model Result, status_id: Result::STATUS[:passed]
+    build = Build.new results: [result_1, result_2]
     build.status.should eql(:passed)
   end
 
   it "has status busy if any results is busy" do
-    result_1 = stub_model Result
-    result_2 = stub_model Result
-    result_1.stub(:status_id).and_return(Result::STATUS[:busy])
-    result_2.stub(:status_id).and_return(Result::STATUS[:pending])
-    build = Build.new
-    build.stub(:results).and_return([result_1, result_2])
+    result_1 = stub_model Result, status_id: Result::STATUS[:busy]
+    result_2 = stub_model Result, status_id: Result::STATUS[:pending]
+    build = Build.new results: [result_1, result_2]
     build.status.should eql(:busy)
   end
 
   it "has status failed if any results is busy" do
-    result_1 = stub_model Result
-    result_2 = stub_model Result
-    result_1.stub(:status_id).and_return(Result::STATUS[:failed])
-    result_2.stub(:status_id).and_return(Result::STATUS[:skipped])
-    build = Build.new
-    build.stub(:results).and_return([result_1, result_2])
+    result_1 = stub_model Result, status_id: Result::STATUS[:failed]
+    result_2 = stub_model Result, status_id: Result::STATUS[:skipped]
+    build = Build.new results: [result_1, result_2]
     build.status.should eql(:failed)
   end
 
@@ -40,4 +31,33 @@ describe Build do
     build.end_time
   end
 
+  it "can be skipped" do
+    result = stub_model Result
+    build = Build.new :results => [result]
+    build.skip!
+    result.skipped?.should be_true
+  end
+
+  it "can update git" do
+    project = stub_model Project, folder_path: '/project', branch: 'master'
+    git = stub
+    git.stub(:reset_hard)
+    git.stub(:checkout)
+    git.should_receive(:pull)
+    Git.should_receive(:open).and_return(git)
+    build = Build.new project: project
+    build.update_commit!
+  end
+
+  it "can build" do
+    project = stub_model Project, folder_path: '/project'
+    result = stub_model Result
+    build = Build.new project: project, results: [result]
+    build.should_receive(:update_commit!)
+    result.should_receive(:command).and_return(stub_model Command, command: "ls -l")
+    mailstub = stub
+    CiMailer.should_receive(:build_result).with(build).and_return(mailstub)
+    mailstub.should_receive(:deliver)
+    build.build!
+  end
 end

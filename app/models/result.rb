@@ -39,7 +39,7 @@ class Result < ActiveRecord::Base
   end
 
   def status
-    STATUS.detect {|k,v| v==status_id}.first
+    STATUS.detect {|k,v| v==status_id}.try(:first)
   end
 
   def in_status?(status)
