@@ -1,6 +1,6 @@
 %tr
   %th Build
-  %th Final result
+  %th.result-col Final result
   - @project.commands.each do |command|
-    %th= command.name
-  %th Actions
+    %th.result-col= command.name
+  %th.small-col

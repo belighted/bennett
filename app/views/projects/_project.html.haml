@@ -1,3 +1,4 @@
 %tr
   %td= link_to project.name, project
   %td= status_for_project project
+  %td.small-col= render 'build_button', project: project

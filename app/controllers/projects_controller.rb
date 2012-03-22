@@ -10,10 +10,9 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @builds = @project.builds.paginate(per_page: 5, page: params[:page], order: 'created_at DESC')
-    @new_build = Build.new
     respond_to do |format|
       format.html
-      format.js { render partial: 'projects/builds', locals: { builds: @builds } }
+      format.js { render partial: 'projects/builds', locals: {project: @project, builds: @builds} }
     end
   end
 

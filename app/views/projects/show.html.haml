@@ -6,31 +6,13 @@
 #my-tab-content.tab-content
   #builds-list-tab.active
     %h2 Build results
-    = render partial: 'builds', locals: { builds: @builds }
+    = render 'builds', project: @project, builds: @builds
 
   #commands-list-tab
-    = render partial: 'commands/list'
+    = render 'commands/list'
 
   #settings-list-tab
-    %h2 Project setting
-    %p
-      %strong Name:
-      = @project.name
-    %p
-      %strong Location:
-      = @project.folder_path
-    %p
-      %strong Branch:
-      = @project.branch
-    %p
-      %strong Recentizer&#153; 3000 Pro:
-      = @project.recentizer? ? 'On' : 'Off'
-    %p
-      %strong Post-Receive URL for Git hook:
-      = "/projects/#{@project.id}/builds"
-
-    = link_to 'Edit', edit_project_path(@project), :class => "btn"
-    = link_to "Delete", @project, confirm: "Are you sure you want to delete this project and all these builds and commands?", method: :delete, class: "btn danger"
+    = render 'settings'
 
 %script{:type => "text/javascript", :charset => "utf-8"}
   = "projects = new Projects();"

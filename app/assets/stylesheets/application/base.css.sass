@@ -14,8 +14,17 @@ body
     display: block
     margin: 25px 0
 
-  table tr td
-    vertical-align: middle
+  table tr
+    td
+      vertical-align: middle
+    td.small-col, th.small-col
+      width: 1px
+      white-space: nowrap
+    td.result-col, th.result-col, td.result-cell
+      width: 140px
+      white-space: nowrap
+      text-align: center
+
 footer
   padding: 20px
   text-align: center

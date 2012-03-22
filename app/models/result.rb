@@ -10,19 +10,14 @@ class Result < ActiveRecord::Base
   belongs_to :build
   belongs_to :command
 
-  validates :status_id, :inclusion => { :in => STATUS.values }
+  validates :status_id, :inclusion => { :in => STATUS.values, :on => :update }
   validates_presence_of :build, :command
 
   before_destroy :delete_log_file
 
-  before_validation :set_default_status, :on => :create
-  before_create :build_log_path
-
-  def set_default_status
+  before_create :set_defaults
+  def set_defaults
     self.status_id = STATUS[:pending]
-  end
-
-  def build_log_path
     self.log_path = "#{Rails.root}/log/build_#{build.project.name.parameterize('_')}_#{build.id}_#{command.name.parameterize('_')}.log"
   end
 

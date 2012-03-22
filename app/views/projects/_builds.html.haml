@@ -7,6 +7,4 @@
   - else
     %p No builds yet... Click below to request one!
 
-  = form_for [@project, @new_build], remote: true do |f|
-    = hidden_field_tag :manual, true
-    = f.submit 'Request a build', :class => "btn"
+  = render 'build_button', project: project
