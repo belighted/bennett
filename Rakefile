@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Beci::Application.load_tasks
+Bennett::Application.load_tasks

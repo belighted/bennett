@@ -10,6 +10,8 @@ gem 'notifier'
 gem 'haml'
 gem 'hpricot'
 gem 'unicorn'
+gem 'devise'
+gem 'cancan'
 
 group :development do
   gem 'capistrano'

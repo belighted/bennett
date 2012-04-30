@@ -58,13 +58,13 @@ namespace :workers do
     while true do
       unworked_queues = Resque.queues - worked_queues
       unworked_queues.each do |q_name|
-        puts "[BeCI] Spawing worker for queue: #{q_name}"
+        puts "[Bennett] Spawing worker for queue: #{q_name}"
         pids[q_name] = run_worker(q_name)
         worked_queues << q_name
       end
       deprecated_queues = worked_queues - Resque.queues
       deprecated_queues.each do |q_name|
-        puts "[BeCI] Terminating queue: #{q_name}"
+        puts "[Bennett] Terminating queue: #{q_name}"
         kill_workers pids[q_name]
         worked_queues.delete q_name
       end

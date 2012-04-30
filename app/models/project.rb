@@ -2,6 +2,8 @@ class Project < ActiveRecord::Base
   has_many :builds, :dependent => :destroy
   has_many :commands, :dependent => :destroy
   accepts_nested_attributes_for :commands
+  has_many :rights
+  has_many :users, :through => :rights
 
   validates :folder_path, :uniqueness => true
   validate :unique_command_positions

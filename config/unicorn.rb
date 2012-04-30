@@ -1,12 +1,12 @@
 worker_processes 2
 
-working_directory "/Users/ci/Sites/beci/current"
+working_directory "/Users/ci/Sites/bennett/current"
 
-listen "/tmp/unicorn.beci.sock", :backlog => 64
-pid "/Users/ci/Sites/beci/shared/tmp/unicorn.pid"
+listen "/tmp/unicorn.bennett.sock", :backlog => 64
+pid "/Users/ci/Sites/bennett/shared/tmp/unicorn.pid"
 
-stderr_path "/Users/ci/Sites/beci/shared/log/unicorn.stderr.log"
-stdout_path "/Users/ci/Sites/beci/shared/log/unicorn.stdout.log"
+stderr_path "/Users/ci/Sites/bennett/shared/log/unicorn.stderr.log"
+stdout_path "/Users/ci/Sites/bennett/shared/log/unicorn.stdout.log"
 
 preload_app true
 GC.respond_to?(:copy_on_write_friendly=) and

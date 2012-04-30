@@ -1,5 +1,5 @@
 class BuildsController < ApplicationController
-  skip_before_filter :authenticate, :only => :create
+  load_and_authorize_resource except: :create
 
   # POST /builds
   # POST /builds.json
@@ -7,6 +7,12 @@ class BuildsController < ApplicationController
     @project = Project.find(params[:project_id])
     @build = @project.builds.new(params[:build])
     @manual = params[:manual]
+
+    if params[:token].present?
+      raise CanCan::AccessDenied unless @project.hook_token == params[:token]
+    else
+      authorize! :create, @build
+    end
 
     respond_to do |format|
       if @manual || @build.new_activity?

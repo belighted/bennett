@@ -1,12 +1,12 @@
 require 'capistrano_colors'
 
-set :application,       "beci"
-set :repository,        "git@git.belighted.com:beci.git"
+set :application,       "bennett"
+set :repository,        "git@git.belighted.com:bennett.git"
 set :scm,               :git
 set :deploy_via,        :remote_cache
 set :branch,            "master"
 set :user,              "ci"
-set :deploy_to,         "/Users/ci/Sites/beci"
+set :deploy_to,         "/Users/ci/Sites/bennett"
 set :rails_env,         "production"
 set :ssh_options,       {:forward_agent => true}
 set :use_sudo,          false
