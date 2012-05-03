@@ -29,5 +29,8 @@ Bennett::Application.configure do
   config.assets.debug = true
 
   config.action_mailer.delivery_method = :sendmail
-  HOST = "localhost:3000"
+  HOST = 'bennett.dev'
+  config.action_mailer.default_url_options = {
+    :host => HOST,
+  }
 end

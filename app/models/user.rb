@@ -11,7 +11,18 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
+  before_create :apply_invites
+
+  scope :admins, where(:admin => true)
+  scope :not_admins, where(:admin => false)
+
   def projects
     admin? ? Project.all : super
+  end
+
+private
+
+  def apply_invites
+    Invitation.apply_all_to_user(self)
   end
 end

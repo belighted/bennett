@@ -1,0 +1,5 @@
+%h2 Admins
+
+= form_tag users_path, method: :put do
+  = select_tag :admins, options_from_collection_for_select(@users, :id, :email, lambda{|u| u.admin?}), :multiple => true, :class => 'admins-multiselect'
+  .actions= submit_tag 'Update', class: 'btn danger'

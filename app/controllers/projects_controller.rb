@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :except => :add_user_or_invite
 
   def index
     respond_to do |format|
@@ -10,6 +10,8 @@ class ProjectsController < ApplicationController
 
   def show
     @builds = @project.builds.paginate(per_page: 5, page: params[:page], order: 'created_at DESC')
+    @available_users = User.all - @project.users
+    @pending_invitations = Invitation.find_all_by_project_id(@project.id)
     respond_to do |format|
       format.html
       format.js { render partial: 'projects/builds', locals: {project: @project, builds: @builds} }
@@ -44,5 +46,23 @@ class ProjectsController < ApplicationController
     @project.destroy
     flash[:success] = "Project correctly destroyed."
     redirect_to projects_url
+  end
+
+  def add_user_or_invite
+    @project = Project.find(params[:project_id])
+    if params[:user_id].present?
+      object = Right.new project: @project, user: User.find(params[:user_id]), role: params[:role]
+      success = "#{object.user.email} is now #{object.role} on #{@project.name}"
+    else
+      object = Invitation.new project: @project, issuer: current_user, role: params[:role], email: params[:email]
+      success = "#{object.email} was invited as #{object.role} on #{@project.name}"
+    end
+    authorize! :create, object
+    if object.save
+      flash[:success] = success
+    else
+      flash[:error] = "Error adding user to project: #{object.errors.full_messages.to_sentence}"
+    end
+    redirect_to @project
   end
 end

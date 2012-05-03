@@ -1,0 +1,42 @@
+%h2 Project users
+
+%table.condensed-table.zebra-striped.bordered-table.small-table
+  %thead
+    %tr
+      %th E-mail
+      %th Role
+      %th
+  %tbody
+    - @project.rights.each do |right|
+      %tr
+        %td= right.user.email
+        %td
+          = form_for right do |f|
+            = f.select :role, options_for_select(Right::ROLES, :selected => right.role), {}, :class => 'right-role-select'
+        %td= link_to 'Remove', right, :method => :delete, :class => 'btn danger small', :confirm => 'Remove access to this user?'
+    %tr
+      %th{:colspan => 3} Pending invitations
+    - @pending_invitations.each do |invitation|
+      %tr
+        %td
+          %em= invitation.email
+        %td
+          = form_for invitation do |f|
+            = f.select :role, options_for_select(Right::ROLES, :selected => invitation.role), {}, :class => 'invitation-role-select'
+        %td= link_to 'Remove', invitation, :method => :delete, :class => 'btn danger small', :confirm => 'Recall this invitation?'
+
+= form_tag project_add_user_or_invite_path(@project) do
+  %table.condensed-table.zebra-striped.bordered-table.small-table
+    %thead
+      %tr
+        %th{:colspan => 3} Add a user to this project
+    %tbody
+      %tr
+        %td
+          = select_tag :user_id, options_from_collection_for_select(@available_users, :id, :email), :prompt => 'Select a user'
+          .or or
+          = email_field_tag :email, '', :placeholder => 'Enter an e-mail to invite a new user'
+        %td
+          = select_tag :role, options_for_select(Right::ROLES)
+        %td
+          = submit_tag 'Add', :class => 'btn success'

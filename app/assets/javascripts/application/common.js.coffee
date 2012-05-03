@@ -1,3 +1,4 @@
-$(document).ready () ->
-  $(".alert-message").alert()
-  $(".alert-message").alert('close')
+$ ->
+  $('.alert-message a').click (e) ->
+    e.preventDefault()
+    $(e.target).closest('.alert-message').hide()

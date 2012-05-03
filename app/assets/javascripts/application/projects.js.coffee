@@ -7,3 +7,7 @@ class window.Projects
     resource = new Resource()
     url = "/projects/"+params["id"]+".js"
     resource.reload(url, "#builds-list", params)
+
+$ ->
+  $('select.right-role-select, select.invitation-role-select').change (e) ->
+    $(e.target).closest('form').submit()

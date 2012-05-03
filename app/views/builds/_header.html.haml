@@ -3,4 +3,5 @@
   %th.result-col Final result
   - @project.commands.each do |command|
     %th.result-col= command.name
-  %th.small-col
+  - if can? :destroy, Build.new(project: @project)
+    %th.small-col

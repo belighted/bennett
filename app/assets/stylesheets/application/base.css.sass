@@ -5,7 +5,7 @@ body
     margin-left: 0
 
   a.back
-    background: url(asset-path("buttons/back.png", image)) no-repeat center left
+    background: image-url("buttons/back.png") no-repeat center left
     +link-colors(#000000)
     +hover-link
     padding-left: 20px
@@ -17,6 +17,8 @@ body
   table tr
     td
       vertical-align: middle
+      form
+        margin-bottom: 0
     td.small-col, th.small-col
       width: 1px
       white-space: nowrap
@@ -24,6 +26,20 @@ body
       width: 140px
       white-space: nowrap
       text-align: center
+  table.small-table
+    width: 1px
+
+  .actions
+    height: 28px
+    .main-action
+      float: left
+    .other-actions
+      float: left
+      margin-left: 100px
+
+  .or
+    font-style: italic
+    text-align: center
 
 footer
   padding: 20px

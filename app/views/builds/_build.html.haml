@@ -2,4 +2,6 @@
   %td= build_information build
   %td.result-col= status_image(build.status)
   = build_results_in_tds build
-  %td.small-col= link_to "Delete", [@project, build], :confirm => "Are you sure you want to delete this build?", :method => :delete, :class => "btn small danger" unless build.status == :busy
+  - if can? :destroy, build
+    %td.small-col
+      = link_to "Delete", [@project, build], :confirm => "Are you sure you want to delete this build?", :method => :delete, :class => "btn small danger" unless build.status == :busy

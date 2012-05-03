@@ -5,6 +5,7 @@ class Right < ActiveRecord::Base
   belongs_to :user
 
   validates :project, :user, presence: true
+  validates :user_id, uniqueness: {scope: :project_id}
   validates :role, inclusion: {in: ROLES}
 
   ROLES.each do |r|

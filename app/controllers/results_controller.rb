@@ -1,7 +1,7 @@
 class ResultsController < ApplicationController
-  load_and_authorize_resource
-  load_and_authorize_resource :build
   load_and_authorize_resource :project
+  load_and_authorize_resource :build, :through => :project
+  load_and_authorize_resource :through => :build
 
   def show
     respond_to do |format|

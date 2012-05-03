@@ -1,12 +1,18 @@
-%p= link_to "New project", new_project_path, :class => "btn success"
-%table.zebra-striped.bordered-table
-  %tr
-    %thead
-      %th Project name
-      %th Last status
-      %th.small-col
-    %tbody#projects-summary
-      = render partial: @projects
-%script{:type => "text/javascript", :charset => "utf-8"}
-  = "project = new Projects();"
-  = "project.reload_projects(#{ params.to_json });".html_safe
+- if can? :create, Project
+  %p= link_to 'New project', new_project_path, :class => 'btn success'
+
+- if @projects.any?
+  %table.zebra-striped.bordered-table
+    %tr
+      %thead
+        %th Project name
+        %th Last status
+
+        %th.small-col
+      %tbody#projects-summary
+        = render partial: @projects
+  %script{:type => 'text/javascript', :charset => 'utf-8'}
+    = 'project = new Projects();'
+    = "project.reload_projects(#{ params.to_json });".html_safe
+- else
+  %p You're not part of any project yet. Ask an admin to invite you!

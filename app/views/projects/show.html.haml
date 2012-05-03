@@ -1,7 +1,9 @@
-%ul.tabs{ "data-tabs" => "tabs"}
-  %li.active=link_to "Builds", "#builds-list-tab"
-  %li=link_to "Commands", "#commands-list-tab"
-  %li=link_to "Settings", "#settings-list-tab"
+%ul.tabs{'data-tabs' => 'tabs'}
+  %li.active= link_to 'Builds', '#builds-list-tab'
+  %li= link_to 'Commands', '#commands-list-tab'
+  %li= link_to 'Settings', '#settings-list-tab'
+  - if can? :read, @project.rights.first
+    %li= link_to 'Users', '#users-list-tab'
 
 #my-tab-content.tab-content
   #builds-list-tab.active
@@ -14,6 +16,9 @@
   #settings-list-tab
     = render 'settings'
 
-%script{:type => "text/javascript", :charset => "utf-8"}
-  = "projects = new Projects();"
+  #users-list-tab
+    = render 'users'
+
+%script{:type => 'text/javascript', :charset => 'utf-8'}
+  = 'projects = new Projects();'
   = "projects.reload_builds(#{ params.to_json });".html_safe

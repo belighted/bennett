@@ -8,8 +8,8 @@ class BuildsController < ApplicationController
     @build = @project.builds.new(params[:build])
     @manual = params[:manual]
 
-    if params[:token].present?
-      raise CanCan::AccessDenied unless @project.hook_token == params[:token]
+    if params[:t].present?
+      raise CanCan::AccessDenied unless @project.hook_token == params[:t]
     else
       authorize! :create, @build
     end

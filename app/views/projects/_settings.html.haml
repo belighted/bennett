@@ -13,7 +13,9 @@
   = @project.recentizer? ? 'On' : 'Off'
 %p
   %strong Post-Receive URL for Git hook:
-  = project_builds_url(@project, format: :json)
+  = project_builds_url(@project, format: :json, t: @project.hook_token)
 
-= link_to 'Edit', edit_project_path(@project), :class => "btn"
-= link_to "Delete", @project, confirm: "Are you sure you want to delete this project and all these builds and commands?", method: :delete, class: "btn danger"
+- if can? :update, @project
+  = link_to 'Edit', edit_project_path(@project), :class => "btn"
+- if can? :destroy, @project
+  = link_to "Delete", @project, confirm: "Are you sure you want to delete this project and all these builds and commands?", method: :delete, class: "btn danger"

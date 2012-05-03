@@ -7,4 +7,4 @@
   - else
     %p No builds yet... Click below to request one!
 
-  = render 'build_button', project: project
+  = render 'build_button', project: project if can?(:create, Build.new(project: project))

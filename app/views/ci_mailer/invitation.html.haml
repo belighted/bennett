@@ -1,0 +1,11 @@
+!!!
+%head
+%body
+  %p
+    You have been invited as a
+    = @invitation.role
+    of
+    = @invitation.project.name
+    on Bennett!
+
+  %p= link_to 'Sign up on Bennett!', new_user_registration_url(:email => @invitation.email)
