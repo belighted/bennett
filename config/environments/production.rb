@@ -60,4 +60,7 @@ Bennett::Application.configure do
 
   config.action_mailer.delivery_method = :sendmail
   HOST = "ci.belighted.com"
+  config.action_mailer.default_url_options = {
+    :host => HOST,
+  }
 end

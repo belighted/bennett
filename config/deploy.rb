@@ -1,7 +1,7 @@
 require 'capistrano_colors'
 
 set :application,       "bennett"
-set :repository,        "git@git.belighted.com:bennett.git"
+set :repository,        "git@git.belighted.com:beci.git"
 set :scm,               :git
 set :deploy_via,        :remote_cache
 set :branch,            "master"
@@ -30,8 +30,8 @@ role :app, "192.168.1.99"                          # This may be the same as you
 role :db,  "192.168.1.99", :primary => true        # This is where Rails migrations will run
 
 # Symplinks, cron & db dump
-after "deploy:update_code", "deploy:symlink_directories_and_files"
-after "deploy:symlink_directories_and_files", "deploy:restart_workers"
+before "deploy:assets:precompile", "deploy:symlink_directories_and_files"
+after "deploy:update_code", "deploy:restart_workers"
 
 def run_remote_rake(rake_cmd) 
   rake_args = ENV['RAKE_ARGS'].to_s.split(',')
