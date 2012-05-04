@@ -1,0 +1,3 @@
+production:
+  adapter: sqlite3
+  database: db/production.sqlite3

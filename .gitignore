@@ -1,58 +1,11 @@
-# Rails locals
-log/*
-log/**/*
-tmp/*
-tmp/**/*
-config/database.yml
-config/newrelic.yml
+log/**
+tmp/**
 db/*.sqlite3
-db/sphinx/*
-config/*.sphinx.conf
-capybara*
-pickle-email*
-vendor/plugins/rails_upgrade/*
-
-# Ignore all backup files
 *~
-
-# Mac-specific files
 .DS_Store
-
-# Ignore Emacs auto saved files
 *#*#
 .#*
 .emacs*
-
-# Ignore Vim swap files
 *.swp
+db/redis_dump.rdb
 
-# Ignore Aptana project files
-.project
-
-# Ignore autotest (cucumber, rspec, ...) local configuration
-.autotest
-
-.idea
-
-# Merge files
-*.orig
-
-# Ignore mysql dump
-*.sql
-
-public/system
-public/assets
-private_assets
-
-# Ignore development plugins
-vendor/plugins/query_reviewer
-
-.bundle
-.rspec
-*.zip
-
-# Ignore rcov generated files
-coverage.data
-coverage*
-
-*.swo

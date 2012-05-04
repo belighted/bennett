@@ -12,10 +12,7 @@ end
 
 def kill_workers(pids)
   pids = [pids].compact unless pids.is_a? Enumerable
-  if pids.empty?
-    puts "No workers to kill"
-  else
-    puts "Killing processes: #{pids.join(' ')}"
+  unless pids.empty?
     system "kill -s QUIT #{pids.join(' ')}"
   end
 end
