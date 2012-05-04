@@ -42,7 +42,9 @@ class Ability
         end
       end
     else
-      can :create, User
+      can :create, User do |u|
+        !User.any?
+      end
     end
 
   end

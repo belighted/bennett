@@ -1,0 +1,20 @@
+%h2 Welcome to Bennett!
+
+%p Create your first admin account to get started
+
+= form_for User.new do |f|
+  - f.labeled_input :email do
+    = f.label :email
+    .input
+      = f.email_field :email
+  - f.labeled_input :password do
+    = f.label :password
+    .input
+      = f.password_field :password
+  - f.labeled_input :password_confirmation do
+    = f.label :password_confirmation
+    .input
+      = f.password_field :password_confirmation
+
+  .actions
+    = f.submit 'Sign up', :class => 'btn'

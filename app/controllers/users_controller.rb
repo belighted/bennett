@@ -20,4 +20,18 @@ class UsersController < ApplicationController
     end
     redirect_to users_url
   end
+
+  def new
+  end
+
+  def create
+    if @user.save
+      @user.update_attribute :admin, true
+      flash[:success] = 'Welcome to Bennett!'
+      redirect_to root_url
+    else
+      render :new
+    end
+  end
+
 end

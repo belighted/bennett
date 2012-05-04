@@ -16,7 +16,7 @@ Bennett::Application.routes.draw do
   resources :builds, :only => [:index]
   resources :rights, :only => [:update, :destroy]
   resources :invitations, :only => [:update, :destroy]
-  resources :users, :only => [:index], :path => 'admins' do
+  resources :users, :only => [:index, :new, :create], :path => 'admins' do
     put :update, on: :collection
   end
 

@@ -11,8 +11,10 @@ class ApplicationController < ActionController::Base
     if user_signed_in?
       flash[:error] = exception.message
       redirect_to root_url
+    elsif User.any?
+      redirect_to login_url
     else
-      redirect_to login_path
+      redirect_to new_user_url
     end
   end
 end
