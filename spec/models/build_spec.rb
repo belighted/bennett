@@ -54,7 +54,8 @@ describe Build do
     result = stub_model Result
     build = Build.new project: project, results: [result]
     build.should_receive(:update_commit!)
-    result.should_receive(:command).and_return(stub_model Command, command: "ls -l")
+    result.should_receive(:command).and_return(stub_model Command, command: 'ls -l')
+    result.should_receive(:log_path).and_return('/tmp/bennett_spec_build.log')
     mailstub = stub
     CiMailer.should_receive(:build_result).with(build).and_return(mailstub)
     mailstub.should_receive(:deliver)
