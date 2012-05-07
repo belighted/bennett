@@ -1,21 +1,25 @@
-%h2 Sign up
+.login-logo
+  = image_tag 'large-logo.png'
 
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
-  - f.labeled_input :email do
-    = f.label :email
-    .input
-      = f.email_field :email, value: params[:user].try(:[], :email) || params[:email]
-  - f.labeled_input :password do
-    = f.label :password
-    .input
-      = f.password_field :password
-  - f.labeled_input :password_confirmation do
-    = f.label :password_confirmation
-    .input
-      = f.password_field :password_confirmation
+.login-content
+  %h2 Sign up
 
-  .actions
-    .main-action
-      = f.submit 'Sign up', :class => 'btn'
-    .other-actions
-      = render 'links'
+  = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+    - f.labeled_input :email do
+      = f.label :email
+      .input
+        = f.email_field :email, value: params[:user].try(:[], :email) || params[:email]
+    - f.labeled_input :password do
+      = f.label :password
+      .input
+        = f.password_field :password
+    - f.labeled_input :password_confirmation do
+      = f.label :password_confirmation
+      .input
+        = f.password_field :password_confirmation
+
+    .actions
+      .main-action
+        = f.submit 'Sign up', :class => 'btn'
+      .other-actions
+        = render 'links'

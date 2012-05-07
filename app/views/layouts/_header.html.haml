@@ -1,7 +1,8 @@
 .topbar
   .topbar-inner
     .container-fluid
-      = link_to 'Bennett', projects_path, :class => :brand
+      = link_to projects_path, :class => :brand do
+        = image_tag 'logo-32.png', :alt => 'Bennett'
       - if user_signed_in?
         %ul.nav
           %li{ :class => ('active' if current_project.nil?) }=link_to 'All projects', projects_path

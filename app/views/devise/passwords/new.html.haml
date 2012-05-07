@@ -1,15 +1,19 @@
-%h2 Forgot your password?
+.login-logo
+  = image_tag 'large-logo.png'
 
-= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
-  = devise_error_messages!
+.login-content
+  %h2 Forgot your password?
 
-  - f.labeled_input :email do
-    = f.label :email
-    .input
-      = f.email_field :email
+  = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+    = devise_error_messages!
 
-  .actions
-    .main-action
-      = f.submit 'Send me reset password instructions', :class => 'btn'
-    .other-actions
-      = render 'links'
+    - f.labeled_input :email do
+      = f.label :email
+      .input
+        = f.email_field :email
+
+    .actions
+      .main-action
+        = f.submit 'Send me reset password instructions', :class => 'btn'
+      .other-actions
+        = render 'links'
