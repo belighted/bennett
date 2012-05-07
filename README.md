@@ -15,11 +15,11 @@ It is designed to be full-featured yet simple to use, somewhere half-way between
 ## Setup
 
 1. Install [Redis](http://redis.io/download)
-2. Clone the Bennett source code somewhere and move to the **production** branch
+2. Clone the Bennett source code somewhere and move to the **deploy** branch
     
    `git clone git@github.com:belighted/bennett.git`
     
-   `git checkout production`
+   `git checkout deploy`
     
 3. Install the dependencies with Bundler. Bennett uses rbenv and runs on Ruby 1.9.3-p0, so make sure that's the current version if you're using RVM
 
