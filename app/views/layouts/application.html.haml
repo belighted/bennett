@@ -14,4 +14,12 @@
         = yield
     %footer
       %p#autoreload-status.pull-right
-      %p &copy; Belighted 2011-2012
+        %p &copy; Belighted 2011-2012
+
+%script{type: "text/javascript"}
+  var uvOptions = {};
+  (function() {
+  var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+  uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/TJXrfA5U3qJ6fH4TdOClCw.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+  })();
