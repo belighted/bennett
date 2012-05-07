@@ -16,10 +16,13 @@ It is designed to be full-featured yet simple to use, somewhere half-way between
 
 ## Setup
 
-1. Install [Redis](http://redis.io/download)
+1. Install [Redis](http://redis.io/download). You can do so with brew on
+   OS X, or probably with you package manager on Linux.
 2. Clone the Bennett source code somewhere and move to the **deploy** branch
     
    `git clone git@github.com:belighted/bennett.git`
+
+   `cd bennett`
     
    `git checkout deploy`
     
