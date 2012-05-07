@@ -1,5 +1,7 @@
 # Bennett
 
+![](http://labs.belighted.com/bennett/bennett-large.png)
+
 Bennett is a continuous integration server aimed at Ruby on Rails applications and Git.
 
 It is designed to be full-featured yet simple to use, somewhere half-way between [CI Joe](https://github.com/defunkt/cijoe) and [Jenkins](http://jenkins-ci.org/)
@@ -110,3 +112,5 @@ Have a look at the `lib/tasks/` folder to go even deeper.
 ## Help us make it even better !
 
 Bennett was originally designed as an internal tool, with our specific needs in mind. If you encounter bugs or have suggestions on where to go next, please submit an issue or fork the project on [GitHub](https://github.com/belighted/bennett)!
+
+![](http://labs.belighted.com/bennett/bennett-small.png)
