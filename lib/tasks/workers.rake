@@ -1,3 +1,5 @@
+PID_FILE = 'tmp/workers.pid'
+
 # Start a worker with proper env vars and output redirection
 def run_worker(queue)
   ops = {:pgroup => true, :err => [(Rails.root + "log/resque_err").to_s, "a"],
@@ -29,7 +31,8 @@ namespace :workers do
   desc "Quit running workers"
   task :stop => :environment do
     begin
-      pids = [File.read('log/workers.pid')]
+      pids = [File.read(PID_FILE)]
+      File.delete PID_FILE
     rescue
       pids = []
     end
@@ -41,9 +44,9 @@ namespace :workers do
   task :start => :environment do
     ops = {:pgroup => true, :err => [(Rails.root + "log/resque_err").to_s, "a"],
                             :out => [(Rails.root + "log/resque_stdout").to_s, "a"]}
-    pid = spawn("rake workers:run", ops)
+    pid = spawn("rake workers:run RAILS_ENV=#{Rails.env}", ops)
     Process.detach(pid)
-    File.open('log/workers.pid', 'w') do |f|
+    File.open(PID_FILE, 'w') do |f|
       f.write pid
     end
   end
