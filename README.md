@@ -1,6 +1,6 @@
 # Bennett
 
-![](http://labs.belighted.com/bennett/bennett-large.png)
+![](http://platypus.belighted.com/bennett/bennett-large.png)
 
 Bennett is a continuous integration server aimed at Ruby on Rails applications and Git.
 
@@ -35,8 +35,8 @@ It is designed to be full-featured yet simple to use, somewhere half-way between
 
 ## Screenshots
 
-![](http://labs.belighted.com/bennett/bennett_scr1.png)
-![](http://labs.belighted.com/bennett/bennett_scr2.png)
+![](http://platypus.belighted.com/bennett/bennett_scr1.png)
+![](http://platypus.belighted.com/bennett/bennett_scr2.png)
 
 ## Setup
 
@@ -145,4 +145,4 @@ feedback](http://bennett.uservoice.com)!
 
 If you encounter a bug or want to help us with some code, please submit an issue or fork the project on [GitHub](https://github.com/belighted/bennett)!
 
-![](http://labs.belighted.com/bennett/bennett-small.png)
+![](http://platypus.belighted.com/bennett/bennett-small.png)
