@@ -1,8 +1,10 @@
 # Bennett
 
-![](http://labs.belighted.com/bennett/bennett-large.png)
+![](http://platypus.belighted.com/bennett/bennett-large.png)
 
 Bennett is a continuous integration server aimed at Ruby on Rails applications and Git.
+
+It is born from our need for a CI server with several key features such as support for multiple projects and users, and our desire for something as easy as possible to manage.
 
 It is designed to be full-featured yet simple to use, somewhere half-way between [CI Joe](https://github.com/defunkt/cijoe) and [Jenkins](http://jenkins-ci.org/)
 
@@ -13,6 +15,28 @@ It is designed to be full-featured yet simple to use, somewhere half-way between
 * Run any test command
 * Support for [rbenv](https://github.com/sstephenson/rbenv) and [RVM](https://rvm.io/)
 * Automatically build projects using a Git hook
+
+#### Compared to [CI Joe](https://github.com/defunkt/cijoe), Bennett is
+
+* Multi-project and multi-user
+* Heavy
+
+#### Compared to [Jenkins](http://jenkins-ci.org/), Bennett is
+
+* Easy to deploy in a Rails-centric environment
+* Easy to use (IMHO)
+* Limited
+
+#### Compared to [Travis](http://travis-ci.org/), Bennett is
+
+* Able to test your proprietary projects for free
+* Not SaaS, and must be hosted and configured
+* Not distributed
+
+## Screenshots
+
+![](http://platypus.belighted.com/bennett/bennett_scr1.png)
+![](http://platypus.belighted.com/bennett/bennett_scr2.png)
 
 ## Setup
 
@@ -121,4 +145,8 @@ feedback](http://bennett.uservoice.com)!
 
 If you encounter a bug or want to help us with some code, please submit an issue or fork the project on [GitHub](https://github.com/belighted/bennett)!
 
-![](http://labs.belighted.com/bennett/bennett-small.png)
+![](http://platypus.belighted.com/bennett/bennett-small.png)
+
+> Copyright (c) 2012 Belighted sprl
+> 
+> Bennett is distributed under the MIT license, see LICENSE
