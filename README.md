@@ -146,3 +146,7 @@ feedback](http://bennett.uservoice.com)!
 If you encounter a bug or want to help us with some code, please submit an issue or fork the project on [GitHub](https://github.com/belighted/bennett)!
 
 ![](http://platypus.belighted.com/bennett/bennett-small.png)
+
+> Copyright (c) 2012 Belighted sprl
+> 
+> Bennett is distributed under the MIT license, see LICENSE
