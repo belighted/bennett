@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: builds
+#
+#  id                  :integer         not null, primary key
+#  project_id          :integer
+#  commit_hash         :string(255)
+#  commit_message      :string(255)
+#  commit_author       :string(255)
+#  commit_date         :datetime
+#  created_at          :datetime        not null
+#  updated_at          :datetime        not null
+#  commit_author_email :string(255)
+#
+
 class Build < ActiveRecord::Base
   belongs_to :project
   has_many :results, :autosave => true, :dependent => :destroy
@@ -47,7 +62,7 @@ class Build < ActiveRecord::Base
 
   def skip!
     results.each do |result|
-      result.update_attribute :status_id, Result::STATUS[:skipped]
+      result.skip
     end
   end
 
@@ -62,11 +77,11 @@ class Build < ActiveRecord::Base
   def build!
     update_commit!
     results.each do |result|
-      result.update_attribute :start_time, Time.now
+      result.start_now
       if status == :failed
-        result.update_attribute :status_id, Result::STATUS[:skipped]
+        result.skip
       else
-        result.update_attribute :status_id, Result::STATUS[:busy]
+        result.busy
         commands = [ 'unset RAILS_ENV RUBYOPT BUNDLE_GEMFILE BUNDLE_BIN_PATH GEM_HOME RBENV_DIR GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE',
                      '[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"',
                      '[[ -s "$HOME/.rbenv/bin/rbenv" || -s "/usr/local/bin/rbenv" ]] && export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:/usr/local/bin:$PATH" && eval "$(rbenv init -)"',
@@ -74,12 +89,12 @@ class Build < ActiveRecord::Base
                      "#{result.command.command}" ]
         res = system "#{commands.join(';')} > #{result.log_path} 2>&1"
         if res
-          result.update_attribute :status_id, Result::STATUS[:passed]
+          result.pass
         else
-          result.update_attribute :status_id, Result::STATUS[:failed]
+          result.fail
         end
       end
-      result.update_attribute :end_time, Time.now
+      result.end_now
     end
     CiMailer.build_result(self).deliver
   end
