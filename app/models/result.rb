@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: results
+#
+#  id         :integer         not null, primary key
+#  build_id   :integer
+#  command_id :integer
+#  log_path   :string(255)
+#  status_id  :string(255)
+#  start_time :datetime
+#  end_time   :datetime
+#  created_at :datetime        not null
+#  updated_at :datetime        not null
+#
+
 class Result < ActiveRecord::Base
   STATUS = {
     :pending => 'pending',
@@ -46,6 +61,22 @@ class Result < ActiveRecord::Base
     status_id == STATUS[status]
   end
 
+  def skip
+    update_attribute :status_id, Result::STATUS[:skipped]
+  end
+
+  def busy
+    update_attribute :status_id, Result::STATUS[:busy]
+  end
+
+  def pass
+    update_attribute :status_id, Result::STATUS[:passed]
+  end
+
+  def fail
+    update_attribute :status_id, Result::STATUS[:failed]
+  end
+
   def pending?
    in_status? :pending
   end
@@ -64,6 +95,14 @@ class Result < ActiveRecord::Base
 
   def skipped?
     in_status? :skipped
+  end
+
+  def start_now
+    update_attribute :start_time, Time.now
+  end
+
+  def end_now
+    update_attribute :end_time, Time.now
   end
 
   def log
