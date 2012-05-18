@@ -46,6 +46,22 @@ class Result < ActiveRecord::Base
     status_id == STATUS[status]
   end
 
+  def skip
+    update_attribute :status_id, Result::STATUS[:skipped]
+  end
+
+  def busy
+    update_attribute :status_id, Result::STATUS[:busy]
+  end
+
+  def pass
+    update_attribute :status_id, Result::STATUS[:passed]
+  end
+
+  def fail
+    update_attribute :status_id, Result::STATUS[:failed]
+  end
+
   def pending?
    in_status? :pending
   end
@@ -64,6 +80,14 @@ class Result < ActiveRecord::Base
 
   def skipped?
     in_status? :skipped
+  end
+
+  def start_now
+    update_attribute :start_time, Time.now
+  end
+
+  def end_now
+    update_attribute :end_time, Time.now
   end
 
   def log
