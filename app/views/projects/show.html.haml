@@ -1,22 +1,26 @@
-%ul.tabs{'data-tabs' => 'tabs'}
-  %li.active= link_to 'Builds', '#builds-list-tab'
-  %li= link_to 'Commands', '#commands-list-tab'
-  %li= link_to 'Settings', '#settings-list-tab'
-  - if can? :read, @project.rights.first
-    %li= link_to 'Users', '#users-list-tab'
+/ %ul.nav.nav-tabs{'data-tabs' => 'tabs'}
+/   %li.active= link_to 'Builds', '#builds-list-tab'
+/   %li= link_to 'Commands', '#commands-list-tab'
+/   %li= link_to 'Settings', '#settings-list-tab'
+/   - if can? :read, @project.rights.first
+/     %li= link_to 'Users', '#users-list-tab'
 
 #my-tab-content.tab-content
-  #builds-list-tab.active
-    %h2 Build results
+  #builds-list-tab.active.tab-content-inner
+    %h2
+      %span.title
+        Build results
+      %span.line
+      .clear
     = render 'builds', project: @project, builds: @builds
 
-  #commands-list-tab
+  #commands-list-tab.tab-content-inner
     = render 'commands/list'
 
-  #settings-list-tab
+  #settings-list-tab.tab-content-inner
     = render 'settings'
 
-  #users-list-tab
+  #users-list-tab.tab-content-inner
     = render 'users'
 
 %script{:type => 'text/javascript', :charset => 'utf-8'}

@@ -5,21 +5,29 @@
     = stylesheet_link_tag    :application
     = javascript_include_tag :application
     = csrf_meta_tags
-  %body
-    = render partial: 'layouts/header', locals: { projects: @projects, current_project: @project }
-    .container-fluid
+  %body{:class => user_signed_in? ? 'connection-mode' : ''}
+    .container
+      = render partial: 'layouts/header', locals: { projects: @projects, current_project: @project }
       .content
 
         = render partial: "layouts/flashes"
         = yield
+      .spacer-footer
     %footer
-      %p#autoreload-status.pull-right
-        %p &copy; Belighted 2011-2012
+      #footer-inner
+        %p.copyright
+          %span
+            &copy; Bennett 2012
+          %a{:href =>"/", :title =>"About Bennett"} About
+          |
+          %a{:href =>"/", :title =>"Contact Belighted"} Contact
+        %a{:href => "http://www.belighted.com", :class=>"belighted"}
+          %span.hide Belighted - Belgium - Louvain-la-Neuve
 
-%script{type: "text/javascript"}
-  var uvOptions = {};
-  (function() {
-  var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
-  uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/TJXrfA5U3qJ6fH4TdOClCw.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
-  })();
+    %script{type: "text/javascript"}
+      var uvOptions = {};
+      (function() {
+      var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+      uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/TJXrfA5U3qJ6fH4TdOClCw.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+      })();

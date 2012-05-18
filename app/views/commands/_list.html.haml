@@ -1,7 +1,12 @@
-%h2 Build commands
+%h2
+  %span.title
+    Build commands
+  %span.line
+  .clear
+
 - if @project.commands.any?
   = form_for @project do |f|
-    %table.condensed-table.bordered-table
+    %table.condensed-table.bordered-table.zebra-striped
       %thead
         %tr
           %th Order
@@ -12,7 +17,9 @@
       %tbody
         = f.fields_for :commands do |cf|
           %tr
-            %td{ :width => "10px" }= cf.text_field :position, :class => :span1, :disabled => !can?(:manage, dummy_command)
+            %td{ :width => "10px" }
+              = cf.hidden_field :id
+              = cf.text_field :position, :class => :span1, :disabled => !can?(:manage, dummy_command)
             %td
               %strong= cf.object.name
             %td
@@ -20,14 +27,14 @@
             - if can? :manage, dummy_command
               %td
                 = link_to 'Edit', edit_project_command_path(@project, cf.object), :class => "btn"
-                = link_to 'Remove', project_command_path(@project, cf.object), :method => :delete, :confirm => 'Are you sure?', :class => "btn danger"
+                = link_to 'Delete', project_command_path(@project, cf.object), :method => :delete, :confirm => 'Are you sure?', :class => "btn btn-danger"
       - if can? :manage, dummy_command
         %tfoot
           %tr
             %td= f.submit 'Save', :class => "btn"
             %td
             %td
-            %td= link_to 'Add', new_project_command_path(@project), :class => "btn success"
+            %td= link_to 'Add', new_project_command_path(@project), :class => "btn btn-success"
 - else
   %p No commands configured yet...
-  = link_to 'Add one to get started!', new_project_command_path(@project), :class => "btn success"
+  = link_to 'Add one to get started !', new_project_command_path(@project), :class => "btn btn-success"

@@ -1,4 +1,4 @@
 $ ->
   $('select.admins-multiselect').multiSelect
-    selectableHeader : '<h4>Available users</h4>'
-    selectedHeader : '<h4>Admins</h4>'
+    selectableHeader : '<h3>Available users</h3>'
+    selectedHeader : '<h3>Admins</h3>'

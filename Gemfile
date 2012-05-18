@@ -28,4 +28,5 @@ group :assets do
   gem 'coffee-rails'
   gem 'uglifier'
   gem 'compass',      '0.12.alpha.1'
+  gem 'bootstrap-sass'
 end

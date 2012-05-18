@@ -1,6 +1,10 @@
-%h2 New project
-
-= link_to 'Back to the project list', projects_path, :class => :back
+%h2
+  %span.title
+    New project
+  %span.line
+  .btn-box
+    = link_to 'Back to the project list', projects_path, :class => "btn pull-right"
+  .clear
 
 = render :partial => "form", :locals => { :project => @project }
 

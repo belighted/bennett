@@ -1,20 +1,21 @@
 = form_for project do |form|
   - form.labeled_input :name do
-    = form.label :name
+    = form.label :name, :class => "hide"
     .input
-      = form.text_field :name
+      = form.text_field :name, :placeholder => "Name"
   - form.labeled_input :folder_path do
-    = form.label :folder_path, "Location"
+    = form.label :folder_path, "Location", :class => "hide"
     .input
-      = form.text_field :folder_path
+      = form.text_field :folder_path, :placeholder => "Location"
   - form.labeled_input :branch do
-    = form.label :branch
+    = form.label :branch, :class => "hide"
     .input
-      = form.text_field :branch
+      = form.text_field :branch, :placeholder => "Branch"
   - form.labeled_input :recentizer do
-    = form.label :recentizer
-    .input
+    .input.checkbox-btn
       = form.check_box :recentizer
-      %span.help-block Only process most recent build (Recentizer&#153; 3000 Pro)
-  .actions
+    = form.label :recentizer, :class => "checkbox-style1"
+    .clear
+    %span.help-block Only process most recent build (Recentizer&#153; 3000 Pro)
+  .input
     = form.submit "Save the project", :class => "btn"

@@ -1,3 +1,9 @@
-%h2 Editing command
+%h2
+  %span.title
+    Editing command
+  %span.line
+  .btn-box
+    = link_to 'Back to the command list', @project, :class => "btn pull-right"
+  .clear
 
 = render 'form'

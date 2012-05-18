@@ -1,20 +1,27 @@
-%h2 Welcome to Bennett!
+#main-content
+  %h2.welcome
+    %span.first
+    %span.register
+      Register
+    %span.last
+    .clear
 
-%p Create your first admin account to get started
+  %p Create your first admin account to get started
 
-= form_for User.new do |f|
-  - f.labeled_input :email do
-    = f.label :email
+  = form_for User.new do |f|
+    - f.labeled_input :email do
+      = f.label :email, :class => "hide"
+      .input
+        = f.email_field :email, :placeholder =>"Email"
+    - f.labeled_input :password do
+      = f.label :password, :class => "hide"
+      .input
+        = f.password_field :password, :placeholder =>"Password"
+    - f.labeled_input :password_confirmation do
+      = f.label :password_confirmation, :class => "hide"
+      .input
+        = f.password_field :password_confirmation, :placeholder =>"Password confirmation"
     .input
-      = f.email_field :email
-  - f.labeled_input :password do
-    = f.label :password
-    .input
-      = f.password_field :password
-  - f.labeled_input :password_confirmation do
-    = f.label :password_confirmation
-    .input
-      = f.password_field :password_confirmation
-
-  .actions
-    = f.submit 'Sign up', :class => 'btn'
+      = f.submit 'Valid & send me confirmation email', :class => 'btn'
+  %p.small
+    %a{:href => "/", :title => "Return to login page"} I have yet an account
