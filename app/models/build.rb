@@ -1,18 +1,3 @@
-# == Schema Information
-#
-# Table name: builds
-#
-#  id                  :integer         not null, primary key
-#  project_id          :integer
-#  commit_hash         :string(255)
-#  commit_message      :string(255)
-#  commit_author       :string(255)
-#  commit_date         :datetime
-#  created_at          :datetime        not null
-#  updated_at          :datetime        not null
-#  commit_author_email :string(255)
-#
-
 class Build < ActiveRecord::Base
   belongs_to :project
   has_many :results, :autosave => true, :dependent => :destroy

@@ -1,18 +1,3 @@
-# == Schema Information
-#
-# Table name: results
-#
-#  id         :integer         not null, primary key
-#  build_id   :integer
-#  command_id :integer
-#  log_path   :string(255)
-#  status_id  :string(255)
-#  start_time :datetime
-#  end_time   :datetime
-#  created_at :datetime        not null
-#  updated_at :datetime        not null
-#
-
 class Result < ActiveRecord::Base
   STATUS = {
     :pending => 'pending',
