@@ -134,8 +134,9 @@ Have a look at the `lib/tasks/` folder to go even deeper.
 
 1. `rake bennett:stop`
 2. `git pull`
-3. `rake bennett:setup`
-4. `rake bennett:start`
+3. `bundle install`
+4. `rake bennett:setup`
+5. `rake bennett:start`
 
 ## Help us make it even better !
 
