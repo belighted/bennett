@@ -9,7 +9,12 @@
       - if can? :manage, Resque
         %li= link_to 'Queues', '/resque', :target => :_blank
       - if user_signed_in?
-        %li= link_to 'Log out', destroy_user_session_path, :method => :delete
+        %li.logout
+          = link_to destroy_user_session_path, :method => :delete do
+            %span.hide-responsive Log Out
+            %span.show-responsive
+              %i.icon-off.icon-white
+    .clear
 - else
   %header
     %h1.logo

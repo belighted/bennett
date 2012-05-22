@@ -14,5 +14,5 @@ class window.Resource
             $("#autoreload-status").html("Refreshed at <span>"+new Date().toTimeString().split(" ")[0]+"</span>")
             $("#autoreload-status").removeClass("loading")
       ,
-      3000
+      3000000
     )

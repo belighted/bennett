@@ -3,7 +3,10 @@
     Editing command
   %span.line
   .btn-box
-    = link_to 'Back to the command list', @project, :class => "btn pull-right"
+    = link_to @project, :class => "btn pull-right" do
+      Back
+      %span.hide-responsive
+        to the command list
   .clear
 
 = render 'form'

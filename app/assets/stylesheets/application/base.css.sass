@@ -8,7 +8,7 @@ $color2: #97968c
 $color3: #ffffff
 $color4: #97968c
 $color5: #7e1313
-$color6: #5eba67
+$color6: #22783b
 
 @font-face
   font-family: 'BebasNeue'
@@ -52,6 +52,16 @@ body.connection-mode
           height: 68px
           display: block
           @include transition(none)
+@media screen and (max-width: 600px)
+  body.connection-mode .container header h1.small-logo
+    margin: 0 auto 20px auto
+    float: none
+  .content
+    float: left
+    width: 100%
+  body.connection-mode .container header
+    height: 118px
+    background: none
 
 body
   height: 100%
@@ -87,7 +97,14 @@ body
   .col-box2
     width: 60%
     float: left
-
+  @media screen and (max-width: 930px)
+    .col-box
+      width: 100%
+      float: none
+      margin: 0
+    .col-box2
+      width: 100%
+      float: none
   .container
     min-height: 100%
     width: 100%
@@ -106,10 +123,10 @@ body
       height: 30px
     .btn.btn-success
       color: $color6
-      border: 1px solid $color6
+      //border: 1px solid $color6
     .btn.btn-danger
       color: $color1
-      border: 1px solid $color1
+      //border: 1px solid $color1
     .btn, #autoreload-status
       height: 10px
       padding: 8px 10px 10px 10px
@@ -249,6 +266,9 @@ body
     .nav-pills
       float: right
       margin: 0
+      @media screen and (max-width: 600px)
+        li.logout a
+          padding: 8px 5px 10px 5px
       li
         margin: 0 0 0 10px
         a
@@ -425,8 +445,30 @@ body
     height: 16px
     display: block
     margin: 25px 0
+  .table-bordered
+    border: none
+
+  .table-bordered.table-striped
+    border-collapse: separate
+    *border-collapse: collapsed
+    @include border-radius (5px 5px 5px 5px)
+    //border: 1px solid $color4
+    //border-left: 1px solid $color4
+    //border-right: none
+    th, td
+      border-left: 1px solid #D1CFC1
+
+  .table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th
+    background-color: #f8f8f3
+  .table-striped tbody tr td:nth-child(1),
+  .table-striped thead tr th:nth-child(1),
+  .table-striped tfoot tr td:nth-child(1)
+    border-left: none
 
   table tr
+    background: none
+    .center-col
+      text-align: center
     td
       vertical-align: middle
       form
@@ -493,11 +535,25 @@ body
 .ms-container .ms-selection li:not(.disabled):hover
   background-color: #EEE
   background-image: none
+body .container h2 span.hide-responsive
+  float: none
+  width: inherit
+  text-align: inherit
+  padding: 0
+span.show-responsive
+  display: none
+@media screen and (max-width: 600px)
+  span.hide-responsive
+    display: none
+  span.show-responsive
+    display: block
+
 
 table
+  @include box-shadow (0 15px 10px -10px rgba(0, 0, 0, 0.15), 0 1px 4px rgba(0, 0, 0, 0.1), 0 0 30px rgba(0, 0, 0, 0) inset)
   width: 100%
   background-color: $color3
-  border: 1px solid $color4
+  //border: 1px solid $color4
   margin: 0 0 20px 0
   img
     width: 32px
@@ -517,12 +573,10 @@ table
     th.status, th.result-col
       width: 10%
       text-align: center
-  tr:nth-child(odd)
-    background-color: #f8f8f3
   tr
     background-color: $color3
   td, th
-    border-right: 1px solid $color4
+    //border-right: 1px solid $color4
     text-align: left
     padding: 5px 10px 5px 10px
     font-size: 1.2em

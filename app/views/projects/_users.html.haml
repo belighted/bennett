@@ -5,7 +5,7 @@
   .clear
 
 .col-box
-  %table.condensed-table.zebra-striped.bordered-table
+  %table.condensed-table.table-bordered.table-striped
     %thead
       %tr
         %th E-mail
@@ -18,9 +18,9 @@
           %td
             = form_for right do |f|
               = f.select :role, options_for_select(Right::ROLES, :selected => right.role), {}, :class => 'right-role-select'
-          %td= link_to 'Delete', right, :method => :delete, :class => 'btn btn-danger small', :confirm => 'Delete access to this user?'
+          %td.center-col= link_to 'Delete', right, :method => :delete, :class => 'btn btn-danger small', :confirm => 'Delete access to this user?'
       %tr
-        %th{:colspan => 3} Pending invitations
+        %td{:colspan => 3} Pending invitations
       - @pending_invitations.each do |invitation|
         %tr
           %td
@@ -28,10 +28,10 @@
           %td
             = form_for invitation do |f|
               = f.select :role, options_for_select(Right::ROLES, :selected => invitation.role), {}, :class => 'invitation-role-select'
-          %td= link_to 'Delete', invitation, :method => :delete, :class => 'btn btn-danger small', :confirm => 'Recall this invitation?'
+          %td.center-col= link_to 'Delete', invitation, :method => :delete, :class => 'btn btn-danger small', :confirm => 'Recall this invitation?'
 .col-box2
   = form_tag project_add_user_or_invite_path(@project) do
-    %table.condensed-table.zebra-striped.bordered-table
+    %table.condensed-table.table-bordered.table-striped
       %thead
         %tr
           %th{:colspan => 3} Add a user to this project
@@ -43,5 +43,5 @@
             = email_field_tag :email, '', :placeholder => 'Enter an e-mail to invite a new user'
           %td
             = select_tag :role, options_for_select(Right::ROLES)
-          %td
+          %td.center-col
             = submit_tag 'Add', :class => 'btn btn-success'

@@ -11,6 +11,11 @@
       %span.title
         Build results
       %span.line
+      .btn-box
+        = link_to root_url, :class => "btn pull-right" do
+          Back
+          %span.hide-responsive
+            to the dashboard
       .clear
     = render 'builds', project: @project, builds: @builds
 

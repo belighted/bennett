@@ -1,7 +1,7 @@
 #builds-list
   = render 'build_button', project: project if can?(:create, Build.new(project: project))
   - if builds.any?
-    %table.condensed-table.zebra-striped.bordered-table
+    %table.condensed-table.table-bordered.table-striped
       = render partial: 'builds/header'
       = render partial: builds
     = will_paginate builds, :renderer => PaginationListLinkRenderer, :params => { :format => :html }
