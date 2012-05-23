@@ -9,7 +9,7 @@ module ApplicationHelper
       30 => :black,
       31 => :red,
       32 => :green,
-      33 => "#f2cc08",
+      33 => :yellow,
       34 => :blue,
       35 => :magenta,
       36 => :cyan,
@@ -23,7 +23,7 @@ module ApplicationHelper
       47 => :nothing,
     }.each do |key, value|
       if value != :nothing
-        data.gsub!(/\e\[#{key}m/,"<span style=\"color:#{value}\">")
+        data.gsub!(/\e\[#{key}m/,"<span class=\"#{value}\">")
       else
         data.gsub!(/\e\[#{key}m/,"<span>")
       end
