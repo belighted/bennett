@@ -6,7 +6,6 @@
 $color1: #d13d2e
 $color2: #97968c
 $color3: #ffffff
-$color4: #97968c
 $color5: #7e1313
 $color6: #22783b
 
@@ -44,6 +43,7 @@ body.connection-mode
         height: 68px
         margin: 0 20px 0 0
         font-family: "BebasRegular", Helvetica, Arial, sans-serif
+        font-weight: normal
         letter-spacing: 1px
         float: left
         a, a:hover
@@ -62,6 +62,13 @@ body.connection-mode
   body.connection-mode .container header
     height: 118px
     background: none
+
+body .container .content #main-content input#user_remember_me
+  width: auto
+  height: auto
+  display: block
+  padding: 0
+  background: none
 
 body
   height: 100%
@@ -91,12 +98,16 @@ body
   form .checkbox-inner
     padding: 0 0 0 95px
   .col-box
-    width: 35%
+    width: 45%
     float: left
-    margin: 0 5% 0 0
+    margin: 0 10% 0 0
+    select
+      width: 110px
   .col-box2
-    width: 60%
+    width: 45%
     float: left
+    select
+      width: 110px
   @media screen and (max-width: 930px)
     .col-box
       width: 100%
@@ -132,14 +143,15 @@ body
       padding: 8px 10px 10px 10px
       margin: 0
       font-family: "BebasNeue", Helvetica, Arial, sans-serif
+      font-weight: normal
       letter-spacing: 1px
       text-transform: uppercase
-      color: $color4
+      color: $color2
       line-height: 14px
       @include text-shadow (rgba($color3, 1) 0px 1px 1px)
       @include border-radius (5px 5px 5px 5px)
       @include background-image(linear-gradient(top, #f5f4f0, #d1cfc1))
-      border: 1px solid $color4
+      border: 1px solid $color2
       &:hover
         @include background-image(linear-gradient(bottom, #f5f4f0, #d1cfc1))
         background-position: 0 0
@@ -164,6 +176,7 @@ body
         padding: 8px 10px 10px 10px
         margin: 0
         font-family: "BebasNeue", Helvetica, Arial, sans-serif
+        font-weight: normal
         letter-spacing: 1px
         text-transform: uppercase
         font-size: 0.6em
@@ -191,6 +204,7 @@ body
         padding: 8px 10px 10px 10px
         margin: 0
         font-family: "BebasNeue", Helvetica, Arial, sans-serif
+        font-weight: normal
         letter-spacing: 1px
         text-transform: uppercase
         font-size: 0.6em
@@ -241,15 +255,16 @@ body
             padding: 8px 10px 10px 10px
             margin: 0 10px 0 0
             font-family: "BebasNeue", Helvetica, Arial, sans-serif
+            font-weight: normal
             letter-spacing: 1px
             text-transform: uppercase
-            color: $color4
+            color: $color2
             line-height: 14px
             font-size: 1.3em
             @include text-shadow (rgba($color3, 1) 0px 1px 1px)
             @include border-radius (5px 5px 5px 5px)
             @include background-image(linear-gradient(top, #f5f4f0, #d1cfc1))
-            border: 1px solid $color4
+            border: 1px solid $color2
             &:hover, &.active
               @include background-image(linear-gradient(bottom, #f5f4f0, #d1cfc1))
               background-position: 0 0
@@ -276,6 +291,7 @@ body
           padding: 8px 10px 10px 10px
           margin: 0
           font-family: "BebasNeue", Helvetica, Arial, sans-serif
+          font-weight: normal
           letter-spacing: 1px
           text-transform: uppercase
           font-size: 1.6em
@@ -313,8 +329,8 @@ body
       input
         display: block
         width: 280px
-        height: 10px
-        padding: 22px 10px 18px 10px
+        height: 16px
+        padding: 19px 10px 15px
         font-size: 1.4em
         line-height: 140%
         color: $color2
@@ -324,12 +340,12 @@ body
         background: transparent image-url("input-txt-bg.png") no-repeat 0 0
         &:focus
           background: transparent image-url("input-txt-bg.png") no-repeat 0 -50px
-
       input.btn
         height: 50px
         padding: 5px 10px 0px 10px
         margin: 0 10px 0 10px
         font-family: "BebasNeue", Helvetica, Arial, sans-serif
+        font-weight: normal
         text-transform: uppercase
         font-size: 2em
         color: $color3
@@ -349,6 +365,7 @@ body
 
     h2
       font-family: "BebasNeue", Helvetica, Arial, sans-serif
+      font-weight: normal
       color: $color1
       font-size: 2.6em
       text-transform: uppercase
@@ -410,6 +427,7 @@ body
         height: 322px
         margin: 25px auto 0 auto
         font-family: "BebasRegular", Helvetica, Arial, sans-serif
+        font-weight: normal
         a
           background: image-url("large-logo.png") no-repeat 0 10px
           width: 381px
@@ -452,8 +470,8 @@ body
     border-collapse: separate
     *border-collapse: collapsed
     @include border-radius (5px 5px 5px 5px)
-    //border: 1px solid $color4
-    //border-left: 1px solid $color4
+    //border: 1px solid $color2
+    //border-left: 1px solid $color2
     //border-right: none
     th, td
       border-left: 1px solid #D1CFC1
@@ -512,26 +530,43 @@ body
     clear: both
     height: 80px
 
+.ms-container .ms-selectable, .ms-container .ms-selection
+  width: 45%
+  border: none
 .ms-container h3
   margin: 0
   padding: 15px 10px
   @include background-image(linear-gradient(top, #f5f4f0, #d1cfc1))
-  color: $color4
+  color: $color2
   font-size: 1.3em
   text-align: center
-  //border: 1px solid $color4
+  //border: 1px solid $color2
   @include border-radius (5px 5px 0px 0px)
   @include text-shadow (rgba($color3, 1) 0px 1px 1px)
 
+.ms-container .ms-selectable
+  margin-right: 10%
+
+#musical.modal
+  padding: 20px
+  background: black
+  overflow: hidden
+  iframe
+    overflow: hidden
+
 .ms-container .ms-selectable li.ms-elem-selectable, .ms-container .ms-selection li.ms-elem-selected
-  border-bottom: 1px solid $color4
-  padding: 10px
-  color: $color2
+  padding: 10px 0
+  color: $color5
+  text-align: center
+  font-size: 1.2em
+.ms-container li.ms-elem-selectable:not(.disabled):hover, .ms-container .ms-selection li:not(.disabled):hover
+  color: $color1
 .ms-container ul.ms-list
-  width: inherit
+  width: 100%
   height: inherit
+  padding: 0
 .ms-container
-  background-position: 121px 15px
+  background-position: 50% 15px
 .ms-container .ms-selection li:not(.disabled):hover
   background-color: #EEE
   background-image: none
@@ -548,12 +583,38 @@ span.show-responsive
   span.show-responsive
     display: block
 
+table input.span1
+  text-align: center
+
+@media screen and (max-width: 600px)
+  body div#users-list-tab.tab-content-inner
+    display: none
+  body div#builds-list-tab.tab-content-inner
+    table tbody td.result-cell, table thead th.non-responsive
+      display: none
+  th.result-col
+    @include border-radius(0 4px 0 0)
+  .table-bordered tbody:last-child tr:last-child td.result-col
+    @include border-radius(0 0 4px 0)
+  body .container table tbody tr td a.btn
+    margin: 3px 0 0 0
+  body .pagination ul li a
+    display: none
+  body .pagination ul li a.active, body .pagination ul li.prev a,  body .pagination ul li.next a
+    display: block
+
+table td span.status a
+  text-decoration: none
+  border-bottom: none
+
+.tab-content
+  overflow: inherit
 
 table
   @include box-shadow (0 15px 10px -10px rgba(0, 0, 0, 0.15), 0 1px 4px rgba(0, 0, 0, 0.1), 0 0 30px rgba(0, 0, 0, 0) inset)
   width: 100%
   background-color: $color3
-  //border: 1px solid $color4
+  //border: 1px solid $color2
   margin: 0 0 20px 0
   img
     width: 32px
@@ -562,12 +623,12 @@ table
     text-align: center
   thead
     @include background-image(linear-gradient(top, #f5f4f0, #d1cfc1))
-    border-bottom: 1px solid $color4
+    border-bottom: 1px solid $color2
     tr
       @include background-image(linear-gradient(top, #f5f4f0, #d1cfc1))
     th
       padding: 15px 10px
-      color: $color4
+      color: $color2
       @include text-shadow (rgba($color3, 1) 0px 1px 1px)
       font-size: 1.3em
     th.status, th.result-col
@@ -576,7 +637,7 @@ table
   tr
     background-color: $color3
   td, th
-    //border-right: 1px solid $color4
+    //border-right: 1px solid $color2
     text-align: left
     padding: 5px 10px 5px 10px
     font-size: 1.2em
@@ -622,11 +683,11 @@ footer
     .copyright
       padding: 14px 0 0 0
       font-size: 1.1em
-      color: $color4
+      color: $color2
       span
         font-weight: bold
       a
-        color: #97968c
+        color: $color2
 
     a.belighted
       width: 92px

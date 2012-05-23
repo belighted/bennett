@@ -5,7 +5,7 @@
     = stylesheet_link_tag    :application
     = javascript_include_tag :application
     = csrf_meta_tags
-    %meta{:name => "viewport", :content => "width=device-width"}
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=0.5, maximum-scale=2"}
   %body{:class => user_signed_in? ? 'connection-mode' : ''}
     .container
       = render partial: 'layouts/header', locals: { projects: @projects, current_project: @project }
@@ -13,13 +13,22 @@
 
         = render partial: "layouts/flashes"
         = yield
+      .modal#myModal2.fade
+        .modal-header
+          %button{:class => "close", "data-dismiss" => "modal"} ×
+          %h3 About Bennett
+        .modal-body
+          %p One fine body
+
+        .modal-footer
+          %a{:href => "#", :class => "btn", "data-dismiss" => "modal"} Close
       .spacer-footer
     %footer
       #footer-inner
         %p.copyright
           %span
             &copy; Bennett 2012
-          %a{:href =>"/", :title =>"About Bennett"} About
+          %a{:href =>"#myModal2", :title => "About Bennett", "data-toggle" => "modal"} About
           |
           %a{:href =>"/", :title =>"Contact Belighted"} Contact
         %a{:href => "http://www.belighted.com", :class=>"belighted"}
