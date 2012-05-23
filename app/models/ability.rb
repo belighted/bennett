@@ -34,7 +34,7 @@ class Ability
           Right.find_by_project_id_and_user_id(r.build.project_id, user.id).present?
         end
 
-        can :create, Invitation do |i|
+        can :manage, Invitation do |i|
           Right.find_by_project_id_and_user_id(i.project_id, user.id).try :admin?
         end
         can :manage, Right do |r|

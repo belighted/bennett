@@ -21,6 +21,11 @@ end
 
 group :test do
   gem 'rspec-rails'
+  gem 'ZenTest'
+  gem 'autotest-rails'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'database_cleaner'
 end
 
 group :assets do
