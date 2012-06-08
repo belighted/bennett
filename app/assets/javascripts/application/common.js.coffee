@@ -12,4 +12,4 @@ $ ->
           clone = $(this).clone(true, true)
           $(this).after(clone).remove()
     , 20)
-  $("#myModal").modal options
+  $("#myModal").modal()

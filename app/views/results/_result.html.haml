@@ -3,7 +3,12 @@
   = render partial: @build
 
 %h2="Log: #{@result.command.name}"
-%p="Started at: #{l @result.start_time} - Ended at: #{l @result.end_time}"
+%p
+  Started at:
+  = l @result.start_time
+  - if @result.end_time.present?
+    \- Ended at:
+    = l @result.end_time
 %pre
   - if File.exists?(@result.log_path)
     = escape_to_html @result.log
