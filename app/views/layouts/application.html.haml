@@ -13,24 +13,20 @@
 
         = render partial: "layouts/flashes"
         = yield
-      .modal#myModal2.fade
-        .modal-header
-          %button{:class => "close", "data-dismiss" => "modal"} ×
-          %h3 About Bennett
-        .modal-body
-          %p One fine body
 
-        .modal-footer
-          %a{:href => "#", :class => "btn", "data-dismiss" => "modal"} Close
       .spacer-footer
     %footer
       #footer-inner
         %p.copyright
           %span
-            &copy; Bennett 2012
-          %a{:href =>"#myModal2", :title => "About Bennett", "data-toggle" => "modal"} About
+            Copyright &copy; 2012
+            = link_to 'Belighted sprl', 'http://belighted.com'
           |
-          %a{:href =>"/", :title =>"Contact Belighted"} Contact
+          = link_to 'About', 'http://platypus.belighted.com/bennett/'
+          |
+          = link_to 'Report bug', 'https://github.com/belighted/bennett/issues'
+          |
+          = link_to 'Source code', 'https://github.com/belighted/bennett'
         %a{:href => "http://www.belighted.com", :class=>"belighted"}
           %span.hide Belighted - Belgium - Louvain-la-Neuve
 
