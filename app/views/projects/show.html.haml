@@ -1,15 +1,8 @@
-/ %ul.nav.nav-tabs{'data-tabs' => 'tabs'}
-/   %li.active= link_to 'Builds', '#builds-list-tab'
-/   %li= link_to 'Commands', '#commands-list-tab'
-/   %li= link_to 'Settings', '#settings-list-tab'
-/   - if can? :read, @project.rights.first
-/     %li= link_to 'Users', '#users-list-tab'
-
 #my-tab-content.tab-content
   #builds-list-tab.active.tab-content-inner
     %h2
       %span.title
-        Build results
+        = @project.name
       %span.line
       .btn-box
         = link_to root_url, :class => "btn pull-right" do

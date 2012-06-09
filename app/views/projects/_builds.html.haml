@@ -5,9 +5,7 @@
       = render partial: 'builds/header'
       = render partial: builds
     = will_paginate builds, :renderer => PaginationListLinkRenderer, :params => { :format => :html }
-    #autoreload-status
-      Refreshed at
-      %span= Time.now.strftime("%H:%M:%S")
+    #autoreload-status.hide
     .clear
   - else
     %p No builds yet... Click below to request one!
