@@ -18,8 +18,9 @@
   #settings-list-tab.tab-content-inner
     = render 'settings'
 
-  #users-list-tab.tab-content-inner
-    = render 'users'
+  - if can? :read, @project.users
+    #users-list-tab.tab-content-inner
+      = render 'users'
 
 %script{:type => 'text/javascript', :charset => 'utf-8'}
   = 'projects = new Projects();'
