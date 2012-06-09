@@ -10,11 +10,11 @@
     - f.labeled_input :email do
       = f.label :email, :class => "hide"
       .input
-        = f.email_field :email
+        = f.email_field :email, :placeholder => "E-mail"
     - f.labeled_input :password do
       = f.label :password, :class => "hide"
       .input
-        = f.password_field :password
+        = f.password_field :password, :placeholder => "Password"
     - if devise_mapping.rememberable?
       - f.labeled_input :remember_me, :class => "checkbox-inner" do
         = f.label :remember_me

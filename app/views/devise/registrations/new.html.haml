@@ -10,7 +10,7 @@
     - f.labeled_input :email do
       = f.label :email, :class => "hide"
       .input
-        = f.email_field :email, value: params[:user].try(:[], :email) || params[:email], :placeholder =>"Email"
+        = f.email_field :email, value: params[:user].try(:[], :email) || params[:email], :placeholder =>"E-mail"
     - f.labeled_input :password do
       = f.label :password, :class => "hide"
       .input
