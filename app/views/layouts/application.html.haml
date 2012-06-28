@@ -5,21 +5,35 @@
     = stylesheet_link_tag    :application
     = javascript_include_tag :application
     = csrf_meta_tags
-  %body
-    = render partial: 'layouts/header', locals: { projects: @projects, current_project: @project }
-    .container-fluid
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=0.5, maximum-scale=2"}
+  %body{:class => user_signed_in? ? 'connection-mode' : ''}
+    .container
+      = render partial: 'layouts/header', locals: { projects: @projects, current_project: @project }
       .content
 
         = render partial: "layouts/flashes"
         = yield
-    %footer
-      %p#autoreload-status.pull-right
-        %p &copy; Belighted 2011-2012
 
-%script{type: "text/javascript"}
-  var uvOptions = {};
-  (function() {
-  var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
-  uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/TJXrfA5U3qJ6fH4TdOClCw.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
-  })();
+      .spacer-footer
+    %footer
+      #footer-inner
+        %p.copyright
+          %span
+            Copyright &copy; 2012
+            = link_to 'Belighted sprl', 'http://belighted.com'
+          |
+          = link_to 'About', 'http://platypus.belighted.com/bennett/'
+          |
+          = link_to 'Report bug', 'https://github.com/belighted/bennett/issues'
+          |
+          = link_to 'Source code', 'https://github.com/belighted/bennett'
+        %a{:href => "http://www.belighted.com", :class=>"belighted"}
+          %span.hide Belighted - Belgium - Louvain-la-Neuve
+
+    %script{type: "text/javascript"}
+      var uvOptions = {};
+      (function() {
+      var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+      uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/TJXrfA5U3qJ6fH4TdOClCw.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+      })();

@@ -1,18 +1,21 @@
 class window.Resource
   reload: (url, element, params) ->
-    setInterval(
-      () ->
+    setTimeout(
+      () =>
         $("#autoreload-status").addClass("loading")
         $.ajax
           url: url
           data: params
           dataType: "html"
           ifModified: true
-          success: (data, textStatus) ->
+          success: (data, textStatus) =>
             if(textStatus == "success")
               $(element).html(data)
-            $("#autoreload-status").html("Refreshed at "+new Date().toTimeString().split(" ")[0])
-            $("#autoreload-status").removeClass("loading")
-      ,
-      2000
-    )
+            $("#autoreload-status").html("Refreshed at <span>"+new Date().toTimeString().split(" ")[0]+"</span>")
+            $("#autoreload-status").removeClass("aloading").removeClass("hide")
+            @reload(url, element, params)
+          error: () =>
+            setTimeout(() =>
+              @reload(url, element, params)
+            , 2000)
+      , 3000)

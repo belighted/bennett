@@ -1,5 +1,12 @@
-%h2 Editing project
-
-= link_to 'Back to the project page', @project, :class => :back
+%h2
+  %span.title
+    Editing project
+  %span.line
+  .btn-box
+    = link_to @project, :class => "btn pull-right" do
+      Back
+      %span.hide-responsive
+        to the project page
+  .clear
 
 = render :partial => "form", :locals => { :project => @project }

@@ -1,5 +1,5 @@
 class CiMailer < ActionMailer::Base
-  default :from => "no-reply@ci.belighted.com"
+  default :from => "bennett@#{HOST}"
 
   def build_result(build)
     @build = build

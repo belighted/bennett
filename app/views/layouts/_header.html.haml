@@ -1,19 +1,22 @@
-.topbar
-  .topbar-inner
-    .container-fluid
-      = link_to projects_path, :class => :brand do
-        = image_tag 'logo-32.png', :alt => 'Bennett'
+- if user_signed_in?
+  %header
+    %h1.small-logo
+      %a{:href =>"/", :title =>"Bennett - Go to dashboard"}
+        %span.hide Bennett
+    %ul.nav.nav-pills
+      - if can? :manage, User
+        %li= link_to 'Admins', users_path
+      - if can? :manage, Resque
+        %li= link_to 'Queues', '/resque', :target => :_blank
       - if user_signed_in?
-        %ul.nav
-          %li{ :class => ('active' if current_project.nil?) }=link_to 'All projects', projects_path
-          - projects.each do |project|
-            %li{ :class => ('active' if current_project && project == current_project) }
-              = link_to project.name, project
-        %ul.nav.secondary-nav
-          - if can? :manage, User
-            %li= link_to 'Admins', users_path
-          - if can? :manage, Resque
-            %li= link_to 'Queues', '/resque', :class => 'pull-right', :target => :_blank
-          - if user_signed_in?
-            %li= link_to 'Logout', destroy_user_session_path, :method => :delete
-      - else
+        %li.logout
+          = link_to destroy_user_session_path, :method => :delete do
+            %span.hide-responsive Log Out
+            %span.show-responsive
+              %i.icon-off.icon-white
+    .clear
+- else
+  %header
+    %h1.logo
+      %a{:href =>"/", :title =>"Bennett - Go to homepage"}
+        %span.hide Bennett

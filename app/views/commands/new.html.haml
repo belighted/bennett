@@ -1,3 +1,12 @@
-%h2 New command
+%h2
+  %span.title
+    New command
+  %span.line
+  .btn-box
+    = link_to @project, :class => "btn pull-right" do
+      Back
+      %span.hide-responsive
+        to the command list
+  .clear
 
 = render 'form'

@@ -13,7 +13,6 @@ Bennett::Application.routes.draw do
     post 'add_user_or_invite'
   end
 
-  resources :builds, :only => [:index]
   resources :rights, :only => [:update, :destroy]
   resources :invitations, :only => [:update, :destroy]
   resources :users, :only => [:index, :new, :create], :path => 'admins' do

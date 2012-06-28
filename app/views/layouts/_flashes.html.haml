@@ -1,14 +1,14 @@
 - if flash[:success]
-  .alert-message.success.fade.in
-    %a.close{ :href => "#" } ×
+  .alert.alert-success.fade.in
+    %button.close{ :href => "#", "data-dismiss"=>"alert" } ×
     %p= flash[:success]
 
 - if flash[:error]
-  .alert-message.error.fade.in
-    %a.close{ :href => "#" } ×
+  .alert.alert-error.fade.in
+    %button.close{ :href => "#", "data-dismiss"=>"alert" } ×
     %p= flash[:error]
 
 - if flash[:info]
-  .alert-message.info.fade.in
-    %a.close{ :href => "#" } ×
+  .alert.alert-info.fade.in
+    %button.close{ :href => "#", "data-dismiss"=>"alert" } ×
     %p= flash[:info]

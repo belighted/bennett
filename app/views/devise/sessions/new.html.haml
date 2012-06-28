@@ -1,26 +1,26 @@
-.login-logo
-  = image_tag 'large-logo.png'
-
-.login-content
-  %h2 Sign in
+#main-content
+  %h2.welcome
+    %span.first
+    %span.signin
+      Sign In
+    %span.last
+    .clear
 
   = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
     - f.labeled_input :email do
-      = f.label :email
+      = f.label :email, :class => "hide"
       .input
-        = f.email_field :email
+        = f.email_field :email, :placeholder => "E-mail"
     - f.labeled_input :password do
-      = f.label :password
+      = f.label :password, :class => "hide"
       .input
-        = f.password_field :password
+        = f.password_field :password, :placeholder => "Password"
     - if devise_mapping.rememberable?
-      - f.labeled_input :remember_me do
+      - f.labeled_input :remember_me, :class => "checkbox-inner" do
         = f.label :remember_me
         .input
           = f.check_box :remember_me
-
-    .actions
-      .main-action
-        = f.submit 'Sign in', :class => 'btn'
-      .other-actions
-        = render 'links'
+    .input
+      = f.submit 'Log in', :class => 'btn'
+  %p.small
+    = render 'links'

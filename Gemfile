@@ -21,6 +21,11 @@ end
 
 group :test do
   gem 'rspec-rails'
+  gem 'ZenTest'
+  gem 'autotest-rails'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'database_cleaner'
 end
 
 group :assets do
@@ -28,4 +33,5 @@ group :assets do
   gem 'coffee-rails'
   gem 'uglifier'
   gem 'compass',      '0.12.alpha.1'
+  gem 'bootstrap-sass'
 end

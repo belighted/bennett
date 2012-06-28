@@ -25,6 +25,9 @@ class UsersController < ApplicationController
   end
 
   def create
+    puts ''
+    puts params.inspect
+    puts @user.inspect
     if @user.save
       @user.update_attribute :admin, true
       flash[:success] = 'Welcome to Bennett!'

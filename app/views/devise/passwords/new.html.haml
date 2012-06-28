@@ -1,19 +1,20 @@
-.login-logo
-  = image_tag 'large-logo.png'
+#main-content
+  %h2.forgot
+    %span.first
+    %span.Forgotyourpassword
+      Forgot your password?
+    %span.last
+    .clear
 
-.login-content
-  %h2 Forgot your password?
 
   = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
     = devise_error_messages!
 
     - f.labeled_input :email do
-      = f.label :email
+      = f.label :email, :class => "hide"
       .input
-        = f.email_field :email
-
-    .actions
-      .main-action
-        = f.submit 'Send me reset password instructions', :class => 'btn'
-      .other-actions
-        = render 'links'
+        = f.email_field :email, :placeholder => "E-mail"
+    .input
+      = f.submit 'Send me reset instructions', :class => 'btn'
+  %p.small
+    = render 'links'

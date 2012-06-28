@@ -1,7 +1,24 @@
-%h2= "#{@project.name}: Build results"
+%h2
+  %span.title
+    = "#{@project.name}: #{@result.build.short_hash}"
+  %span.line
+  .btn-box
+    = link_to @project, :class => "btn pull-right" do
+      Back
+      %span.hide-responsive
+        to project
+  .clear
+
+
 #result-details
   = render partial: @result
 
-%script{:type => "text/javascript", :charset => "utf-8"}
-  = "results = new Results();"
-  = "results.reload(#{ params.to_json });".html_safe
+- if @result.busy?
+  #autoreload-status
+    Refreshed at
+    %span= Time.now.strftime("%H:%M:%S")
+  .clear
+
+  %script{:type => "text/javascript", :charset => "utf-8"}
+    = "results = new Results();"
+    = "results.reload(#{ params.to_json });".html_safe

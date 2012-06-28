@@ -1,12 +1,11 @@
-= link_to 'Back', @project, :class => :back
 = form_for [@project, @command]  do |form|
   - form.labeled_input :name do
-    = form.label :name
+    = form.label :name, :class => "hide"
     .input
-      = form.text_field :name
+      = form.text_field :name, :placeholder => "Name"
   - form.labeled_input :command do
-    = form.label :command
+    = form.label :command, :class => "hide"
     .input
-      = form.text_field :command
-  .actions
+      = form.text_field :command, :placeholder => "Command"
+  .input
     = form.submit "Save", :class => "btn"

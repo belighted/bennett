@@ -1,0 +1,28 @@
+[CI] Build result notification -
+= @build.status
+%hr
+
+%p
+  Dear
+  = @build.commit_author
+  ,
+
+%p
+  Your last build
+  = @build.status
+  %br
+  %em
+    = @build.commit_message -
+    = @build.commit_hash
+
+%h4 Build summary
+%ul
+  - @build.results.each do |result|
+    %li
+      = link_to result.command.name, project_build_result_url(@build.project, @build, result)
+      (start time:
+      = result.start_time
+      \- end time:
+      = result.end_time
+      ):
+      = result.status

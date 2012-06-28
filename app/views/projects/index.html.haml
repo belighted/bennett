@@ -1,16 +1,35 @@
-- if can? :create, Project
-  %p= link_to 'New project', new_project_path, :class => 'btn success'
+%h2
+  %span.title
+    Dashboard
+  %span.line
+
+  -if user_signed_in?
+    .btn-group
+      %a{:class => "btn dropdown-toggle", "data-toggle" => "dropdown", :href => "#"}
+        All projects
+        %span.caret
+      %ul.dropdown-menu
+        - @projects.each do |project|
+          %li
+            = link_to project.name, project
+  .clear
+
+-if can? :create, Project
+  %p= link_to 'New project', new_project_path, :class => 'btn btn-success'
 
 - if @projects.any?
-  %table.zebra-striped.bordered-table
-    %tr
-      %thead
+  %table.table-bordered.table-striped
+    %thead
+      %tr
         %th Project name
-        %th Last status
-
+        %th.status Last status
         %th.small-col
       %tbody#projects-summary
         = render partial: @projects
+  #autoreload-status
+    Refreshed at
+    %span= Time.now.strftime("%H:%M:%S")
+  .clear
   %script{:type => 'text/javascript', :charset => 'utf-8'}
     = 'project = new Projects();'
     = "project.reload_projects(#{ params.to_json });".html_safe
