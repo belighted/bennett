@@ -1,6 +1,6 @@
 %tr.build-status-line
   %td= build_information build
-  %td.result-col= status_image(build.status)
+  %td.result-col.highlight= status_image(build.status)
   = build_results_in_tds build
   - if can? :destroy, build
     %td.small-col
