@@ -73,7 +73,7 @@ body .container .content #main-content input#user_remember_me
 
 body
   height: 100%
-  padding: 0 20px 0 20px
+  padding: 0 40px 0 40px
   margin: 0
   font: 62.5% Helvetica, Arial, sans-serif
   background: image-url("body-bg.png") repeat-x 0 0
@@ -109,7 +109,7 @@ body
     float: left
     select
       width: 110px
-  @media screen and (max-width: 930px)
+  @media screen and (max-width: 1040px)
     .col-box
       width: 100%
       float: none
@@ -606,6 +606,8 @@ table input.span1
   text-align: center
 
 @media screen and (max-width: 600px)
+  body div#commands-list-tab.tab-content-inner
+    display: none
   body div#users-list-tab.tab-content-inner
     display: none
   body div#builds-list-tab.tab-content-inner
@@ -703,7 +705,7 @@ footer
       padding: 14px 0 0 0
       font-size: 1.1em
       color: $color2
-      span
+      span.copy
         font-weight: bold
       a
         color: $color2
@@ -718,6 +720,35 @@ footer
       right: 0
       &:hover
         background-position: 0 -24px
+@media screen and (max-width: 600px)
+  body footer
+    #footer-inner
+      .copyright
+        padding: 14px 0 0 0
+        font-size: 1.1em
+        color: $color2
+        text-align: center
+        span.copy
+          font-weight: bold
+          display: block
+        span.sep
+          display: none
+        a
+          color: $color2
+
+      a.belighted
+        width: 92px
+        height: 24px
+        display: block
+        background: url('logo-belighted.png') no-repeat 0 0
+        position: relative
+        top: inherit
+        right: inherit
+        margin: 0 auto
+        &:hover
+          background-position: 0 -24px
+
+
 
 
 
