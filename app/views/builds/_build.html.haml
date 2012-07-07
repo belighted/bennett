@@ -4,4 +4,4 @@
   = build_results_in_tds build
   - if can? :destroy, build
     %td.small-col
-      = link_to "Delete", [@project, build], :confirm => "Are you sure you want to delete this build?", :method => :delete, :class => "btn btn-danger" unless build.status == :busy
+      = link_to "Delete", [@project, build], :data => { :confirm => "Are you sure you want to delete this build?" }, :method => :delete, :class => "btn btn-danger" unless build.status == :busy

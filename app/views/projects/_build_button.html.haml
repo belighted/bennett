@@ -1,3 +1,3 @@
 = form_for [project, Build.new], remote: true do |f|
   = hidden_field_tag :manual, true
-  = f.submit 'Request a build', :class => "btn", :disable_with => 'Please wait...'
+  = f.submit 'Request a build', :class => "btn", 'data-disable-with' => 'Please wait...'
