@@ -12,4 +12,10 @@ describe Project do
     project = Project.new :builds => [build]
     project.status.should eql(:passed)
   end
+
+  it "builds at least once a day" do
+    project = FactoryGirl.create(:project, :build_at_midnight => true)
+    Project.build_at_midnight!
+    project.builds.count.should eq(1)
+  end
 end
