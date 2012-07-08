@@ -19,7 +19,7 @@ module BuildsHelper
   end
 
   def author_and_date(build)
-    (content_tag(:span, build.commit_date, :class => 'commit-date') +
+    (content_tag(:span, time_ago_in_words(build.commit_date) + ' ago', :class => 'commit-date') +
      ' by ' + content_tag(:span, build.commit_author, :class => 'commit-author')).html_safe
   end
 
