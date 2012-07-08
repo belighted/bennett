@@ -9,7 +9,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @builds = @project.builds.paginate(per_page: 5, page: params[:page], order: 'created_at DESC')
+    @builds = @project.builds.includes(:results).paginate(per_page: 5, page: params[:page], order: 'created_at DESC')
     @available_users = User.all - @project.users
     @pending_invitations = Invitation.find_all_by_project_id(@project.id)
     respond_to do |format|
