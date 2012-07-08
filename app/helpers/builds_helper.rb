@@ -24,9 +24,10 @@ module BuildsHelper
   end
 
   def build_time(build)
-    start_time = build.start_time.to_s || ""
-    end_time = build.end_time.to_s || ""
-    content_tag(:span, ("Started at: " + start_time + " - Ended at: " + end_time ))
+    start_time = build.start_time.strftime("%Y-%m-%d %H:%M:%S") || ""
+    end_time = build.end_time.strftime("%Y-%m-%d %H:%M:%S") || ""
+    duration = build.duration.round(0).to_s || ""
+    content_tag(:span, ("Duration: " + duration + "s - Started at: " + start_time + " - Ended at: " + end_time ))
   end
   
   def status_image(status)

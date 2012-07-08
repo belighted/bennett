@@ -18,6 +18,10 @@ class Build < ActiveRecord::Base
     commit_hash.try :[], 0..9
   end
 
+  def duration
+    end_time - start_time
+  end
+
   def status
     [:busy, :failed, :pending, :skipped].each do |status|
       return status unless results_in_status(status).zero?
