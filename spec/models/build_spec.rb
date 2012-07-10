@@ -39,7 +39,7 @@ describe Build do
   end
 
   it "can update git" do
-    project = stub_model Project, folder_path: '/project', branch: 'master'
+    project = stub_model Project, folder_path: '/tmp', branch: 'master'
     git = stub
     git.stub(:reset_hard)
     git.stub(:checkout)
@@ -50,7 +50,7 @@ describe Build do
   end
 
   it "can build" do
-    project = stub_model Project, folder_path: '/project'
+    project = stub_model Project, folder_path: '/tmp'
     result = stub_model Result
     build = Build.new project: project, results: [result]
     build.should_receive(:update_commit!)
