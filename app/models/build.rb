@@ -19,7 +19,7 @@ class Build < ActiveRecord::Base
   end
 
   def duration
-    end_time - start_time
+    end_time - start_time rescue nil
   end
 
   def status
