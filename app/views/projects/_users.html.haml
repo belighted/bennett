@@ -18,7 +18,7 @@
           %td
             = form_for right do |f|
               = f.select :role, options_for_select(Right::ROLES, :selected => right.role), {}, :class => 'right-role-select'
-          %td.center-col= link_to 'Delete', right, :method => :delete, :class => 'btn btn-danger small', :confirm => 'Delete access to this user?'
+          %td.center-col= link_to 'Delete', right, :method => :delete, :class => 'btn btn-danger small', :data => { :confirm => 'Delete access to this user?' }
       %tr
         %td{:colspan => 3}
           %strong Pending invitations
@@ -29,7 +29,7 @@
           %td
             = form_for invitation do |f|
               = f.select :role, options_for_select(Right::ROLES, :selected => invitation.role), {}, :class => 'invitation-role-select'
-          %td.center-col= link_to 'Delete', invitation, :method => :delete, :class => 'btn btn-danger small', :confirm => 'Recall this invitation?'
+          %td.center-col= link_to 'Delete', invitation, :method => :delete, :class => 'btn btn-danger small', :data => { :confirm => 'Recall this invitation?' }
 .col-box2
   = form_tag project_add_user_or_invite_path(@project) do
     %table.condensed-table.table-bordered.table-striped
