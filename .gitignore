@@ -11,3 +11,4 @@ db/redis_dump.rdb
 Vagrantfile
 .vagrant
 public/assets
+.sass-cache

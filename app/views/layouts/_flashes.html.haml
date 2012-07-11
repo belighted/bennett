@@ -3,12 +3,12 @@
     %button.close{ :href => "#", "data-dismiss"=>"alert" } ×
     %p= flash[:success]
 
-- if flash[:error]
+- if flash[:error] || flash[:alert]
   .alert.alert-error.fade.in
     %button.close{ :href => "#", "data-dismiss"=>"alert" } ×
-    %p= flash[:error]
+    %p= flash[:error] || flash[:alert]
 
-- if flash[:info]
+- if flash[:info] || flash[:notice]
   .alert.alert-info.fade.in
     %button.close{ :href => "#", "data-dismiss"=>"alert" } ×
-    %p= flash[:info]
+    %p= flash[:info] || flash[:notice]
