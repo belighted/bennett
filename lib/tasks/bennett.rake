@@ -1,5 +1,5 @@
 namespace :bennett do
-  
+
   desc "Start Bennett"
   task :start do
     Rails.env = 'production'
