@@ -1,6 +1,13 @@
 %tr
   %td= link_to project.name, project
-  %td= status_for_project project
+  %td
+    .project-status
+      - if project.never_built?
+        %span.status-pending Not built yet
+      - else
+        %span{class: "status-#{project.finished_status.to_s}"}= status_image(project.finished_status)
+      - if project.busy_or_pending?
+        %span{class: "status-#{project.status.to_s}"}= status_image(project.status)
   %td.small-col
     - if can? :create, Build.new(project: project)
       = render 'build_button', project: project
