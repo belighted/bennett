@@ -10,3 +10,4 @@ db/*.sqlite3
 db/redis_dump.rdb
 Vagrantfile
 .vagrant
+public/assets

@@ -1,0 +1,7 @@
+#!/bin/sh
+bundle exec rake bennett:stop &&
+git pull &&
+bundle install &&
+bundle exec rake bennett:setup &&
+bundle exec rake bennett:start
+

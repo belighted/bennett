@@ -40,27 +40,45 @@ It is designed to be full-featured yet simple to use, somewhere half-way between
 
 ## Setup
 
-1. Install [Redis](http://redis.io/download). You can do so with brew on
-   OS X, or probably with you package manager on Linux.
-2. Clone the Bennett source code somewhere and move to the **deploy** branch
+#### Redis
+
+Bennett depends on Redis >= 2.4
+
+With Homebrew on OS X:
+
+    brew install redis
+
+On Linux or OS X without Homebrew:
+
+    wget http://redis.googlecode.com/files/redis-2.4.15.tar.gz (or whatever the latest stable version is)
+    tar -xf redis-2.4.15.tar.gz
+    cd redis-2.4.15
+    sudo make install
+
+You can obviously use your system package manager, but verify the
+version first, as some Linux distros still offer Redis 1.2. You should
+also make sure Redis doesn't start as a service, as Bennett will launch
+it itself.
+
+#### Bennett
+
+1. Clone the Bennett source code and move to the **deploy** branch
     
-   `git clone git@github.com:belighted/bennett.git`
+   `git clone git@github.com:belighted/bennett.git -b deploy`
 
    `cd bennett`
     
-   `git checkout deploy`
-    
-3. Install the dependencies with Bundler. Bennett uses rbenv and runs on Ruby 1.9.3-p0, so make sure that's the current version if you're using RVM
+2. Install the dependencies with Bundler. Bennett uses rbenv and runs on Ruby 1.9.3-p194, so make sure that's the current version if you're using RVM
 
    `bundle install`
 
-4. Run the setup
+3. Run the setup
 
    `rake bennett:setup`
    
-5. Configure your hostname in `config/environments/production.rb`
+4. Configure your hostname in `config/environments/production.rb`
    
-6. Start it!
+5. Start it!
 
    `rake bennett:start`
    
@@ -81,7 +99,7 @@ Now add test commands from the Commands tab of your project page, a usual list f
 * bundle exec rspec
 * bundle exec cucumber
 
-When you're ready, go to the Builds tab and request a new build. When it's done, you (or the last person to commit on the project) should receive an e-mail with the result.
+When you're ready, request a new build. When it's done, you (or the last person to commit on the project) should receive an e-mail with the result.
 
 ## Automatic testing
 
@@ -107,6 +125,12 @@ When giving a user access to a project, you can choose between 3 roles:
 
 On top of per-project permissions, global admins can be defined from the **Admins** menu. These users have full admin access to every project, and can add new projects to be tested.
 
+## Updating
+
+Just run `./update`
+
+This script will stop Bennett, do a `git pull`, and restart.
+
 ## Advanced configuration
 
 ### Unicorn
@@ -129,14 +153,6 @@ If you don't want to run Bennett all-in-one, you can run components separately a
 * `rake unicorn:restart RAILS_ENV=production`
 
 Have a look at the `lib/tasks/` folder to go even deeper.
-
-## Updating
-
-1. `rake bennett:stop`
-2. `git pull`
-3. `bundle install`
-4. `rake bennett:setup`
-5. `rake bennett:start`
 
 ## Help us make it even better !
 
