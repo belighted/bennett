@@ -37,3 +37,8 @@
       uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/TJXrfA5U3qJ6fH4TdOClCw.js';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
       })();
+
+- if Rails.env.development?
+  :javascript
+    console.log("params: #{params.inspect.gsub('"', '\\"')}")
+    console.log("flash:  #{flash.to_hash.inspect.gsub('"', '\\"')}")
