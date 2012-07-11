@@ -1,3 +1,5 @@
+= image_tag 'large-logo.png'
+
 %p
   You have been invited as a
   = @invitation.role
@@ -6,3 +8,5 @@
   on Bennett!
 
 %p= link_to 'Sign up on Bennett!', new_user_registration_url(:email => @invitation.email)
+
+= image_tag 'small-logo.png'

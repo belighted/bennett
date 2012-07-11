@@ -63,4 +63,5 @@ Bennett::Application.configure do
   config.action_mailer.default_url_options = {
     :host => HOST,
   }
+  config.action_mailer.asset_host = "http://#{HOST}"
 end

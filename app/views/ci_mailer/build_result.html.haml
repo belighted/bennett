@@ -1,5 +1,11 @@
-[CI] Build result notification -
-= @build.status
+= image_tag 'small-logo.png'
+
+%p
+  = status_image(@build.status)
+  = @build.project.name
+  build
+  = @build.status
+
 %hr
 
 %p
@@ -8,22 +14,31 @@
   ,
 
 %p
-  Your last build
+  Your last build on
+  = @build.project.name
   = @build.status
+
+%p
+  %strong= @build.short_hash
   %br
-  %em
-    = @build.commit_message
-    \-
-    = @build.commit_hash
+  = @build.commit_message
 
 %h4 Build summary
+
+%p
+  Duration:
+  = "#{@build.duration.round}s"
+  %br
+  Started at:
+  = @build.start_time.strftime "%Y-%m-%d %H:%M:%S"
+  %br
+  Ended at:
+  = @build.end_time.strftime "%Y-%m-%d %H:%M:%S"
+
 %ul
   - @build.results.each do |result|
     %li
+      = status_image(result.status)
       = link_to result.command.name, project_build_result_url(@build.project, @build, result)
-      (start time:
-      = result.start_time
-      \- end time:
-      = result.end_time
-      ):
-      = result.status
+      - if result.end_time.present?
+        = "(#{(result.end_time - result.start_time).round}s)"
