@@ -22,8 +22,24 @@ class Project < ActiveRecord::Base
     builds.last
   end
 
+  def last_finished_build
+    builds.last_finished
+  end
+
   def status
-    builds.any? ? builds.last.status : :no_builds
+    never_built? ? :no_builds : last_build.status
+  end
+
+  def finished_status
+    never_built? ? :no_builds : last_finished_build.status
+  end
+  
+  def never_built?
+    builds.none?
+  end
+
+  def busy_or_pending?
+    last_build.busy? || last_build.pending?
   end
 
   def unique_command_positions

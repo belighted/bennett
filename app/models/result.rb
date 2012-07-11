@@ -46,40 +46,14 @@ class Result < ActiveRecord::Base
     status_id == STATUS[status]
   end
 
-  def skip
-    update_attribute :status_id, Result::STATUS[:skipped]
-  end
+  STATUS.keys.each do |status|
+    define_method status do
+      update_attribute :status_id, STATUS[status]
+    end
 
-  def busy
-    update_attribute :status_id, Result::STATUS[:busy]
-  end
-
-  def pass
-    update_attribute :status_id, Result::STATUS[:passed]
-  end
-
-  def fail
-    update_attribute :status_id, Result::STATUS[:failed]
-  end
-
-  def pending?
-   in_status? :pending
-  end
-
-  def busy?
-    in_status? :busy
-  end
-
-  def passed?
-    in_status? :passed
-  end
-
-  def failed?
-    in_status? :failed
-  end
-
-  def skipped?
-    in_status? :skipped
+    define_method "#{status}?" do
+      in_status? status
+    end
   end
 
   def start_now
