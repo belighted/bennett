@@ -17,5 +17,11 @@
     = form.label :recentizer, :class => "checkbox-style1"
     .clear
     %span.help-block Only process most recent build (Recentizer&#153; 3000 Pro)
+  - form.labeled_input :build_at_midnight do
+    .input.checkbox-btn
+      = form.check_box :build_nightly
+    = form.label :build_nightly, :class => "checkbox-style1"
+    .clear
+    %span.help-block Build every night at 1:00 regardless of activity
   .input
     = form.submit "Save the project", :class => "btn"

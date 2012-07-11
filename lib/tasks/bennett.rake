@@ -29,6 +29,7 @@ namespace :bennett do
     Dir.mkdir 'tmp' rescue Errno::EEXIST
     Rake::Task['db:migrate'].invoke
     spawn <<-CMD
+      whenever -w
       command -v redis-server >/dev/null 2>&1 || echo >&2 "Could not find the redis-server executable. Please make sure Redis is installed and redis-server is in your path"
     CMD
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120430150103) do
+ActiveRecord::Schema.define(:version => 20120707154628) do
 
   create_table "builds", :force => true do |t|
     t.integer  "project_id"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20120430150103) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "hook_token"
+    t.boolean  "build_nightly", :default => false
   end
 
   create_table "results", :force => true do |t|
