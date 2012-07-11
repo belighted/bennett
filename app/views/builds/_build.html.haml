@@ -19,7 +19,7 @@
           = build.end_time.strftime "%Y-%m-%d %H:%M:%S"
     - else
       .commit-waiting Waiting for commit info...
-  %td.result-col.highlight= status_image(build.status)
+  %td.result-col.final-result= status_image(build.status)
   = render 'builds/build_tds', build: build
   - if can? :destroy, build
     %td.small-col

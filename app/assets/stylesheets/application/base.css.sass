@@ -483,9 +483,13 @@ body
     height: 16px
     display: block
     margin: 25px 0
-  .highlight
-    //background: red image-url("highlight-bg.png") repeat 0 0 !important
-    background: #F8F8F3 image-url("highlight2-bg.png") repeat-y 50% 0 !important
+  th.final-result, td.final-result
+    border-left: 2px solid #D1CFC1 !important
+    border-right: 1px solid #D1CFC1 !important
+  td.final-result
+    background: #fffffa
+  tr:nth-child(odd) td.final-result
+    background: #ffffee !important
   .table-bordered
     border: none
 
@@ -493,9 +497,6 @@ body
     border-collapse: separate
     *border-collapse: collapsed
     @include border-radius (5px 5px 5px 5px)
-    //border: 1px solid $color2
-    //border-left: 1px solid $color2
-    //border-right: none
     th, td
       border-left: 1px solid #D1CFC1
 
@@ -517,7 +518,6 @@ body
       width: 1px
       white-space: nowrap
     td.result-col, th.result-col, td.result-cell
-      //width: 140px
       white-space: nowrap
       text-align: center
 
