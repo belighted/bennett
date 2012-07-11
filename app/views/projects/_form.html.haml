@@ -15,6 +15,11 @@
     .input.checkbox-btn
       = form.check_box :recentizer
     = form.label :recentizer, :class => "checkbox-style1"
+  - form.labeled_input :build_at_midnight do
+    .input.checkbox-btn
+      = form.check_box :build_at_midnight
+    = form.label :build_at_midnight, :class => "checkbox-style1"
+
     .clear
     %span.help-block Only process most recent build (Recentizer&#153; 3000 Pro)
   .input

@@ -12,6 +12,7 @@ gem 'hpricot'
 gem 'unicorn'
 gem 'devise'
 gem 'cancan'
+gem 'whenever'
 
 group :development do
   gem 'capistrano'

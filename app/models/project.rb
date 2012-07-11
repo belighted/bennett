@@ -11,6 +11,13 @@ class Project < ActiveRecord::Base
 
   before_validation :create_hook_token, on: :create
 
+  def self.build_at_midnight!
+    Project.where(build_at_midnight: true).each do |project|
+      build = project.builds.create
+      Resque.enqueue(CommitsFetcher, build.id)
+    end
+  end
+
   def last_build
     builds.last
   end
