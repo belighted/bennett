@@ -2,7 +2,7 @@ source :rubygems
 
 gem 'rails',         '3.2.2'
 gem 'sqlite3'
-gem 'resque',        '1.20.0', :require => "resque/server"
+gem 'resque',        '1.20.0', require: 'resque/server'
 gem 'git'
 gem 'will_paginate'
 gem 'jquery-rails'
@@ -12,7 +12,7 @@ gem 'hpricot'
 gem 'unicorn'
 gem 'devise'
 gem 'cancan'
-gem 'whenever'
+gem 'whenever', require: false
 
 group :development do
   gem 'capistrano'

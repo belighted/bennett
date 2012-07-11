@@ -14,8 +14,8 @@ describe Project do
   end
 
   it "builds at least once a day" do
-    project = FactoryGirl.create(:project, :build_at_midnight => true)
-    Project.build_at_midnight!
+    project = FactoryGirl.create(:project, :build_nightly => true)
+    Project.build_all_nightly!
     project.builds.count.should eq(1)
   end
 end
