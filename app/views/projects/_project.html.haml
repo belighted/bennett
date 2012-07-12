@@ -4,7 +4,7 @@
     .project-status
       - if project.never_built?
         %span.status-pending Not built yet
-      - else
+      - if project.has_finished_status?
         %span{class: "status-#{project.finished_status.to_s}"}= status_image(project.finished_status)
       - if project.busy_or_pending?
         %span{class: "status-#{project.status.to_s}"}= status_image(project.status)
