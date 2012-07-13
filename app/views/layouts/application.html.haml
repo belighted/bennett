@@ -10,12 +10,11 @@
     .container
       = render partial: 'layouts/header', locals: { projects: @projects, current_project: @project }
       .content
-
-        = render partial: "layouts/flashes"
         = yield
 
       .spacer-footer
     %footer
+      = render partial: "layouts/flashes"
       #footer-inner
         %p.copyright
           %span.copy

@@ -13,3 +13,8 @@ $ ->
           $(this).after(clone).remove()
     , 20)
   $("#myModal").modal()
+
+  setTimeout (->
+    $("div.alert").fadeOut "slow", ->
+      $("div.alert").remove()
+  ), 3000
