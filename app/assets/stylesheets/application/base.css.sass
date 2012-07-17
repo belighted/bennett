@@ -31,6 +31,7 @@ html
   @media screen and (max-width: 600px)
     body
       background: image-url("body-bg.png") repeat-x 0 -40px
+      padding: 0 10px
 
 body.connection-mode
   background: image-url("body-bg.png") repeat-x 0 -120px
@@ -62,8 +63,12 @@ body.connection-mode
     float: left
     width: 100%
   body.connection-mode .container header
-    height: 118px
+    height: 70px
     background: none
+    ul.nav
+      position: absolute
+      top: 10px
+      right: 10px
 
 body .container .content #main-content input#user_remember_me
   width: auto
@@ -74,7 +79,7 @@ body .container .content #main-content input#user_remember_me
 
 body
   height: 100%
-  padding: 0 40px 0 40px
+  padding: 0 40px
   margin: 0
   font: 62.5% Helvetica, Arial, sans-serif
   background: image-url("body-bg.png") repeat-x 0 0
@@ -663,12 +668,12 @@ body .container h2 span.hide-responsive
   width: inherit
   text-align: inherit
   padding: 0
-span.show-responsive
+.show-responsive
   display: none
 @media screen and (max-width: 600px)
-  span.hide-responsive
+  .hide-responsive
     display: none
-  span.show-responsive
+  .show-responsive
     display: block
 
 table input.span1
