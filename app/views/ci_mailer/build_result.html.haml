@@ -1,29 +1,28 @@
-= image_tag 'small-logo.png'
-
-%p
-  = status_image(@build.status)
+%h1{style: "width: 450px; text-align: center;"}
   = @build.project.name
   build
   = @build.status
 
-%hr
+= image_tag "#{@build.status}-huge.png"
 
-%p
-  Dear
-  = @build.commit_author
-  ,
-
-%p
-  Your last build on
-  = @build.project.name
-  = @build.status
+%p{style: "margin-top: 30px;"}
+  - if @build.passed?
+    %strong Woohoo!
+    Your commit on
+    = @build.project.name
+    passed all the tests. Good job!
+  - else
+    %strong Oh no!
+    Your commit on
+    = @build.project.name
+    failed some tests.
 
 %p
   %strong= @build.short_hash
   %br
   = @build.commit_message
 
-%h4 Build summary
+%h2 Build summary
 
 %p
   Duration:
@@ -35,10 +34,10 @@
   Ended at:
   = @build.end_time.strftime "%Y-%m-%d %H:%M:%S"
 
-%ul
+%table{style: "border: 0; vertical-align: middle;"}
   - @build.results.each do |result|
-    %li
-      = status_image(result.status)
-      = link_to result.command.name, project_build_result_url(@build.project, @build, result)
+    %tr
+      %td= status_image(result.status)
+      %td= link_to result.command.name, project_build_result_url(@build.project, @build, result)
       - if result.end_time.present?
-        = "(#{(result.end_time - result.start_time).round}s)"
+        %td= "(#{(result.end_time - result.start_time).round}s)"

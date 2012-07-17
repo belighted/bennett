@@ -33,4 +33,13 @@ Bennett::Application.configure do
     :host => HOST,
   }
   config.action_mailer.asset_host = "http://#{HOST}"
+
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    :user_name => "bennett",
+    :password => "f8734f0c64cab6ab",
+    :address => "mailtrap.io",
+    :port => 2525,
+    :authentication => :plain,
+  }
 end
