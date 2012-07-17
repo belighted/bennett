@@ -2,7 +2,7 @@ namespace :bennett do
 
   desc "Start Bennett"
   task :start do
-    Rails.env = 'production'
+    Rails.env = ENV['RAILS_ENV'] || 'production'
     system <<-CMD
       redis-server config/redis.conf
     CMD
@@ -13,7 +13,7 @@ namespace :bennett do
 
   desc "Stop Bennett"
   task :stop do
-    Rails.env = 'production'
+    Rails.env = ENV['RAILS_ENV'] || 'production'
     Rake::Task['unicorn:stop'].invoke
     Rake::Task['workers:stop'].invoke rescue Errno::ECONNREFUSED
     system <<-CMD
@@ -25,7 +25,7 @@ namespace :bennett do
 
   desc "Setup Bennet and check dependencies"
   task :setup do
-    Rails.env = 'production'
+    Rails.env = ENV['RAILS_ENV'] || 'production'
     Dir.mkdir 'tmp' rescue Errno::EEXIST
     Rake::Task['db:migrate'].invoke
     Rake::Task['assets:precompile'].invoke
@@ -37,7 +37,6 @@ namespace :bennett do
 
   desc "Restart Bennett"
   task :restart do
-    Rails.env = 'production'
     Rake::Task['bennett:stop'].invoke
     Rake::Task['bennett:start'].invoke
   end
