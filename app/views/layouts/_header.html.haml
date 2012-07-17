@@ -5,9 +5,9 @@
         %span.hide Bennett
     %ul.nav.nav-pills
       - if can? :manage, User
-        %li= link_to 'Admins', users_path
+        %li.hide-responsive= link_to 'Admins', users_path
       - if can? :manage, Resque
-        %li= link_to 'Queues', '/resque', :target => :_blank
+        %li.hide-responsive= link_to 'Queues', '/resque', :target => :_blank
       - if user_signed_in?
         %li.logout
           = link_to destroy_user_session_path, :method => :delete do

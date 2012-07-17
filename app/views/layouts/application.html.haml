@@ -5,7 +5,7 @@
     = stylesheet_link_tag    :application
     = javascript_include_tag :application
     = csrf_meta_tags
-    %meta{:name => "viewport", :content => "width=device-width, initial-scale=0.5, maximum-scale=2"}
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1, maximum-scale=1"}
   %body{:class => on_login_page? ? '' : 'connection-mode'}
     .container
       = render partial: 'layouts/header', locals: { projects: @projects, current_project: @project }
@@ -29,13 +29,15 @@
         %a{:href => "http://www.belighted.com", :class=>"belighted"}
           %span.hide Belighted - Belgium - Louvain-la-Neuve
 
-    %script{type: "text/javascript"}
+    :javascript
+      if($(window).width > 600){
       var uvOptions = {};
       (function() {
       var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
       uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/TJXrfA5U3qJ6fH4TdOClCw.js';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
       })();
+      };
 
 - if Rails.env.development?
   :javascript
