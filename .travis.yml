@@ -1,0 +1,9 @@
+language: ruby
+rvm:
+  - 1.9.3
+before_script:
+  - "rake db:reset RAILS_ENV=test"
+script: "rspec"
+notifications:
+  irc:
+    - "irc.freenode.org#belighted"
