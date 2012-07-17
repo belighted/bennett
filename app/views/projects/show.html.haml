@@ -12,14 +12,14 @@
       .clear
     = render 'builds', project: @project, builds: @builds
 
-  #commands-list-tab.tab-content-inner
+  #commands-list-tab.tab-content-inner.hide-responsive
     = render 'commands/list'
 
-  #settings-list-tab.tab-content-inner
+  #settings-list-tab.tab-content-inner.hide-responsive
     = render 'settings'
 
   - if can? :read, @project.users
-    #users-list-tab.tab-content-inner
+    #users-list-tab.tab-content-inner.hide-responsive
       = render 'users'
 
 %script{:type => 'text/javascript', :charset => 'utf-8'}
