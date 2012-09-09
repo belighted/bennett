@@ -73,7 +73,7 @@ class Build < ActiveRecord::Base
     git = Git.open(project.folder_path)
     git.reset_hard
     git.checkout(project.branch)
-    git.pull
+    git.lib.send(:command, 'pull')
     git.checkout(commit_hash)
   end
 
