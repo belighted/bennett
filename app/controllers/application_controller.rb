@@ -4,8 +4,13 @@ class ApplicationController < ActionController::Base
   before_filter :find_projects
 
   def find_projects
-    @projects = current_user.try(:projects) || []
+    @projects = (Project.public + (current_user.try(:projects) || [])).uniq
   end
+
+  def on_login_page?
+    %w(sessions registrations passwords).include? controller_name
+  end
+  helper_method :on_login_page?
 
   rescue_from CanCan::AccessDenied do |exception|
     if user_signed_in?

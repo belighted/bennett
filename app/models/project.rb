@@ -11,6 +11,8 @@ class Project < ActiveRecord::Base
 
   before_validation :create_hook_token, on: :create
 
+  scope :public, where(public: true)
+
   def self.build_all_nightly!
     Project.where(build_nightly: true).each do |project|
       build = project.builds.create
