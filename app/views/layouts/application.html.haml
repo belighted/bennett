@@ -6,7 +6,7 @@
     = javascript_include_tag :application
     = csrf_meta_tags
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1, maximum-scale=1"}
-  %body{:class => user_signed_in? ? 'connection-mode' : ''}
+  %body{:class => on_login_page? ? '' : 'connection-mode'}
     .container
       = render partial: 'layouts/header', locals: { projects: @projects, current_project: @project }
       .content
