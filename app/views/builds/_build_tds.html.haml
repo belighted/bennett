@@ -1,3 +1,3 @@
-- build.results.each do |result|
+- build.results.ordered_by_position.each do |result|
   %td.result-cell
     %span.status= [:busy, :passed, :failed].include?(result.status) ? link_to(status_image(result.status), [build.project, build, result]) : status_image(result.status)
