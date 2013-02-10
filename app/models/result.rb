@@ -16,6 +16,7 @@ class Result < ActiveRecord::Base
   before_destroy :delete_log_file
 
   before_create :set_defaults
+
   def set_defaults
     self.status_id = STATUS[:pending]
     self.log_path = "#{Rails.root}/log/build_#{build.project.name.parameterize('_')}_#{build.id}_#{command.name.parameterize('_')}.log"
@@ -23,6 +24,7 @@ class Result < ActiveRecord::Base
 
   scope :recent_first, order('end_time DESC')
   scope :older_first, order('start_time ASC')
+  scope :ordered_by_position, -> { joins(:command).order("commands.position ASC") }
 
   def delete_log_file
     if File.exists?(log_path)
