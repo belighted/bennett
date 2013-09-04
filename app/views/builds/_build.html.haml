@@ -1,6 +1,6 @@
 %tr.build-status-line
   %td
-    - if build.has_commit_info?
+    - if build && build.has_commit_info? && build.results.any?
       .commit-hash= build.short_hash
       .commit-message= build.commit_message
       .commit-details
