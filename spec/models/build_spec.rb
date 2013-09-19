@@ -40,11 +40,11 @@ describe Build do
 
   it "can update git" do
     project = stub_model Project, folder_path: '/tmp', branch: 'master'
-    git = stub
-    git.stub(:reset_hard)
-    git.stub(:checkout)
-    git.should_receive(:pull)
-    Git.should_receive(:open).and_return(git)
+    Git.should_receive(:open).and_return(git = stub)
+    git.should_receive(:reset_hard)
+    git.should_receive(:checkout).twice
+    git.should_receive(:lib).and_return(lib = stub)
+    lib.should_receive(:command).with('pull')
     build = Build.new project: project
     build.update_commit!
   end
