@@ -196,7 +196,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ZenTest
   autotest-rails
   bootstrap-sass
   cancan

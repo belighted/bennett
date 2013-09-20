@@ -18,7 +18,6 @@ group :development do
   gem 'capistrano'
   gem 'capistrano_colors'
   gem 'mongrel', '1.2.0.pre2'
-  gem 'ZenTest'
 end
 
 group :test do
