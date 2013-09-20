@@ -90,7 +90,7 @@ class Build < ActiveRecord::Base
             "cd #{project.folder_path}",
             "#{result.command.command}"
         ]
-        res = system "$SHELL -lc '#{commands.join(';')}' > #{result.log_path} 2>&1"
+        res = system "$SHELL -ilc '#{commands.join(';')}' > #{result.log_path} 2>&1"
         if res
           result.passed
         else
