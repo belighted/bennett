@@ -13,3 +13,4 @@ Vagrantfile
 public/assets
 .sass-cache
 dump.rdb
+.idea
