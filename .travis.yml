@@ -3,7 +3,6 @@ rvm:
   - 1.9.2
   - 1.9.3
   - 2.0.0
-  - jruby-head
 bundler_args: --without development
 before_script:
   - "rake db:reset RAILS_ENV=test"
