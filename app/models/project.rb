@@ -11,12 +11,40 @@ class Project < ActiveRecord::Base
 
   before_validation :create_hook_token, on: :create
 
+  scope :public, where(public: true)
+
+  def self.build_all_nightly!
+    Project.where(build_nightly: true).each do |project|
+      build = project.builds.create
+      Resque.enqueue(CommitsFetcher, build.id)
+    end
+  end
+
   def last_build
     builds.last
   end
 
+  def last_finished_build
+    builds.last_finished
+  end
+
   def status
-    builds.any? ? builds.last.status : :no_builds
+    never_built? ? :no_builds : last_build.status
+  end
+
+  def finished_status
+    last_finished_build.try :status
+  end
+  def has_finished_status?
+    finished_status.present?
+  end
+
+  def never_built?
+    builds.none?
+  end
+
+  def busy_or_pending?
+    last_build.present? && (last_build.busy? || last_build.pending?)
   end
 
   def unique_command_positions

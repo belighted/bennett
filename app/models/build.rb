@@ -6,16 +6,24 @@ class Build < ActiveRecord::Base
 
   before_create :create_default_results
 
-  def last
-    recent_first.limit(1)
+  def self.last
+    recent_first.limit(1).first
+  end
+
+  def self.last_finished
+    recent_first.detect { |build| build.finished? }
   end
 
   def results_in_status(status)
-    results.select {|r| r.in_status? status}.count
+    results.select { |r| r.in_status? status }.count
   end
 
   def short_hash
     commit_hash.try :[], 0..9
+  end
+
+  def duration
+    end_time - start_time rescue nil
   end
 
   def status
@@ -23,6 +31,16 @@ class Build < ActiveRecord::Base
       return status unless results_in_status(status).zero?
     end
     :passed
+  end
+
+  Result::STATUS.keys.each do |s|
+    define_method "#{s}?" do
+      status == s
+    end
+  end
+
+  def finished?
+    passed? || failed?
   end
 
   def start_time
@@ -47,7 +65,7 @@ class Build < ActiveRecord::Base
 
   def skip!
     results.each do |result|
-      result.skip
+      result.skipped
     end
   end
 
@@ -55,7 +73,7 @@ class Build < ActiveRecord::Base
     git = Git.open(project.folder_path)
     git.reset_hard
     git.checkout(project.branch)
-    git.pull
+    git.lib.send(:command, 'pull')
     git.checkout(commit_hash)
   end
 
@@ -64,7 +82,7 @@ class Build < ActiveRecord::Base
     results.each do |result|
       result.start_now
       if status == :failed
-        result.skip
+        result.skipped
       else
         result.busy
         commands = [ 'unset RAILS_ENV RUBYOPT BUNDLE_GEMFILE BUNDLE_BIN_PATH GEM_HOME RBENV_DIR GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE',
@@ -74,9 +92,9 @@ class Build < ActiveRecord::Base
                      "#{result.command.command}" ]
         res = system "#{commands.join(';')} > #{result.log_path} 2>&1"
         if res
-          result.pass
+          result.passed
         else
-          result.fail
+          result.failed
         end
       end
       result.end_now

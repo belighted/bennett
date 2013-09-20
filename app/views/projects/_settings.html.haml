@@ -17,6 +17,12 @@
   %strong Recentizer&#153; 3000 Pro:
   = @project.recentizer? ? 'On' : 'Off'
 %p
+  %strong Nightly build:
+  = @project.build_nightly? ? 'On' : 'Off'
+%p
+  %strong Visibility:
+  = @project.public? ? 'Public' : 'Private'
+%p
   %strong Post-Receive URL for Git hook:
   = project_builds_url(@project, format: :json, t: @project.hook_token)
 

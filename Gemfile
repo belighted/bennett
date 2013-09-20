@@ -1,8 +1,8 @@
-source :rubygems
+source 'https://rubygems.org'
 
-gem 'rails',         '3.2.2'
+gem 'rails',         '3.2.6'
 gem 'sqlite3'
-gem 'resque',        '1.20.0', :require => "resque/server"
+gem 'resque',        '1.20.0', require: 'resque/server'
 gem 'git'
 gem 'will_paginate'
 gem 'jquery-rails'
@@ -12,6 +12,7 @@ gem 'hpricot'
 gem 'unicorn'
 gem 'devise'
 gem 'cancan'
+gem 'whenever', require: false
 
 group :development do
   gem 'capistrano'
@@ -21,8 +22,6 @@ end
 
 group :test do
   gem 'rspec-rails'
-  gem 'ZenTest'
-  gem 'autotest-rails'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'database_cleaner'

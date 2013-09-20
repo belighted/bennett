@@ -1,28 +1,43 @@
-[CI] Build result notification -
-= @build.status
-%hr
-
-%p
-  Dear
-  = @build.commit_author
-  ,
-
-%p
-  Your last build
+%h1{style: "width: 450px; text-align: center;"}
+  = @build.project.name
+  build
   = @build.status
-  %br
-  %em
-    = @build.commit_message -
-    = @build.commit_hash
 
-%h4 Build summary
-%ul
+= image_tag "#{@build.status}-huge.png"
+
+%p{style: "margin-top: 30px;"}
+  - if @build.passed?
+    %strong Woohoo!
+    Your commit on
+    = @build.project.name
+    passed all the tests. Good job!
+  - else
+    %strong Oh no!
+    Your commit on
+    = @build.project.name
+    failed some tests.
+
+%p
+  %strong= @build.short_hash
+  %br
+  = @build.commit_message
+
+%h2 Build summary
+
+%p
+  Duration:
+  = "#{@build.duration.round}s"
+  %br
+  Started at:
+  = @build.start_time.strftime "%Y-%m-%d %H:%M:%S"
+  %br
+  Ended at:
+  = @build.end_time.strftime "%Y-%m-%d %H:%M:%S"
+
+%table{style: "border: 0; vertical-align: middle;"}
   - @build.results.each do |result|
-    %li
-      = link_to result.command.name, project_build_result_url(@build.project, @build, result)
-      (start time:
-      = result.start_time
-      \- end time:
-      = result.end_time
-      ):
-      = result.status
+    %tr
+      %td= status_image(result.status)
+      %td= link_to result.command.name, project_build_result_url(@build.project, @build, result)
+      - if result.end_time.present?
+        %td= "(#{(result.end_time - result.start_time).round}s)"

@@ -1,9 +1,10 @@
 class CiMailer < ActionMailer::Base
+  helper :builds
   default :from => "bennett@#{HOST}"
 
   def build_result(build)
     @build = build
-    mail(:to => build.commit_author_email, :subject => "[CI] #{build.commit_message} - #{build.status}")
+    mail(:to => build.commit_author_email, :subject => "[CI] #{build.project.name} build #{build.status}")
   end
 
   def invitation(invitation)

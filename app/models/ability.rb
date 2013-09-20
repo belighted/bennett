@@ -42,6 +42,8 @@ class Ability
         end
       end
     else
+      can :read, Project, public: true
+
       can :create, User do |u|
         !User.any?
       end

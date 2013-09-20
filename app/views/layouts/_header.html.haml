@@ -1,22 +1,32 @@
-- if user_signed_in?
+- unless on_login_page?
   %header
     %h1.small-logo
       %a{:href =>"/", :title =>"Bennett - Go to dashboard"}
         %span.hide Bennett
     %ul.nav.nav-pills
       - if can? :manage, User
-        %li= link_to 'Admins', users_path
+        %li.hide-responsive= link_to 'Admins', users_path
       - if can? :manage, Resque
-        %li= link_to 'Queues', '/resque', :target => :_blank
+        %li.hide-responsive= link_to 'Queues', '/resque', :target => :_blank
       - if user_signed_in?
         %li.logout
           = link_to destroy_user_session_path, :method => :delete do
-            %span.hide-responsive Log Out
+            %span.hide-responsive Log out
+            %span.show-responsive
+              %i.icon-off.icon-white
+      - else
+        %li.logout
+          = link_to new_user_session_path do
+            %span.hide-responsive Login
             %span.show-responsive
               %i.icon-off.icon-white
     .clear
 - else
   %header
+    - if @projects.any?
+      %ul.nav.nav-pills
+        %li.hide-responsive= link_to "Back to dashboard", projects_path
+        %li.show-responsive= link_to "Dashboard", projects_path
     %h1.logo
       %a{:href =>"/", :title =>"Bennett - Go to homepage"}
         %span.hide Bennett

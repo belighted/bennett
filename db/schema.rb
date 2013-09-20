@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120430150103) do
+ActiveRecord::Schema.define(:version => 20120717114259) do
 
   create_table "builds", :force => true do |t|
     t.integer  "project_id"
@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(:version => 20120430150103) do
     t.string   "commit_message"
     t.string   "commit_author"
     t.datetime "commit_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.string   "commit_author_email"
   end
 
@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(:version => 20120430150103) do
     t.string   "command"
     t.integer  "position"
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "invitations", :force => true do |t|
@@ -45,9 +45,11 @@ ActiveRecord::Schema.define(:version => 20120430150103) do
     t.boolean  "recentizer"
     t.string   "branch"
     t.string   "folder_path"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.string   "hook_token"
+    t.boolean  "build_nightly", :default => false
+    t.boolean  "public",        :default => false
   end
 
   create_table "results", :force => true do |t|
@@ -57,8 +59,8 @@ ActiveRecord::Schema.define(:version => 20120430150103) do
     t.string   "status_id"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "rights", :force => true do |t|

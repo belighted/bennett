@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
   load_and_authorize_resource :except => :add_user_or_invite
 
   def index
+    redirect_to(login_url) and return unless user_signed_in? || @projects.any?
     respond_to do |format|
       format.html
       format.js { render partial: @projects }
@@ -9,7 +10,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @builds = @project.builds.paginate(per_page: 5, page: params[:page], order: 'created_at DESC')
+    @builds = @project.builds.includes(:results).paginate(per_page: 5, page: params[:page], order: 'created_at DESC')
     @available_users = User.all - @project.users
     @pending_invitations = Invitation.find_all_by_project_id(@project.id)
     respond_to do |format|

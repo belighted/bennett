@@ -16,6 +16,7 @@ class Result < ActiveRecord::Base
   before_destroy :delete_log_file
 
   before_create :set_defaults
+
   def set_defaults
     self.status_id = STATUS[:pending]
     self.log_path = "#{Rails.root}/log/build_#{build.project.name.parameterize('_')}_#{build.id}_#{command.name.parameterize('_')}.log"
@@ -23,6 +24,7 @@ class Result < ActiveRecord::Base
 
   scope :recent_first, order('end_time DESC')
   scope :older_first, order('start_time ASC')
+  scope :ordered_by_position, -> { joins(:command).order("commands.position ASC") }
 
   def delete_log_file
     if File.exists?(log_path)
@@ -46,40 +48,14 @@ class Result < ActiveRecord::Base
     status_id == STATUS[status]
   end
 
-  def skip
-    update_attribute :status_id, Result::STATUS[:skipped]
-  end
+  STATUS.keys.each do |status|
+    define_method status do
+      update_attribute :status_id, STATUS[status]
+    end
 
-  def busy
-    update_attribute :status_id, Result::STATUS[:busy]
-  end
-
-  def pass
-    update_attribute :status_id, Result::STATUS[:passed]
-  end
-
-  def fail
-    update_attribute :status_id, Result::STATUS[:failed]
-  end
-
-  def pending?
-   in_status? :pending
-  end
-
-  def busy?
-    in_status? :busy
-  end
-
-  def passed?
-    in_status? :passed
-  end
-
-  def failed?
-    in_status? :failed
-  end
-
-  def skipped?
-    in_status? :skipped
+    define_method "#{status}?" do
+      in_status? status
+    end
   end
 
   def start_now

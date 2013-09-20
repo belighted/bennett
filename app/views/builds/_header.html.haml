@@ -1,8 +1,8 @@
 %thead
   %tr
     %th Build
-    %th.result-col Final result
+    %th.result-col.final-result Final result
     - @project.commands.each do |command|
       %th.result-col.non-responsive= command.name
     - if can? :destroy, Build.new(project: @project)
-      %th.small-col
+      %th.small-col.hide-responsive

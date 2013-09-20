@@ -28,9 +28,18 @@ Bennett::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
-  config.action_mailer.delivery_method = :sendmail
   HOST = 'bennett.dev'
   config.action_mailer.default_url_options = {
     :host => HOST,
+  }
+  config.action_mailer.asset_host = "http://#{HOST}"
+
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    :user_name => "bennett",
+    :password => "f8734f0c64cab6ab",
+    :address => "mailtrap.io",
+    :port => 2525,
+    :authentication => :plain,
   }
 end

@@ -1,5 +1,6 @@
 class window.Resource
   reload: (url, element, params) ->
+    return unless $(window).width() > 600
     setTimeout(
       () =>
         $("#autoreload-status").addClass("loading")
