@@ -38,6 +38,23 @@ It is designed to be full-featured yet simple to use, somewhere half-way between
 ![](http://platypus.belighted.com/bennett/bennett_scr1.png)
 ![](http://platypus.belighted.com/bennett/bennett_scr2.png)
 
+## Quick Setup using Docker
+- Install Docker, check installation details at https://www.docker.io/gettingstarted/#h_installation
+
+- After docker installed, then pull bennett-docker image
+
+        docker pull zdkaster/bennett-docker
+
+  or
+
+  `git clone git@github.com:belighted/bennett.git -b deploy-docker`
+
+  `docker build -t zdkaster/bennett-docker .`
+
+- Run a new container using zdkaster/bennett-docker image
+
+        docker run -d -p :4000 zdkaster/bennett-docker
+
 ## Setup
 
 #### Redis
