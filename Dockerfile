@@ -48,7 +48,7 @@ RUN git clone https://github.com/zdk/bennett -b docker
 ENV RAILS_ENV production
 RUN (cd bennett && bundle install && rake bennett:setup)
 EXPOSE 4000
-ADD ./start.sh ./start.sh
+ADD ./.docker/start.sh ./start.sh
 RUN chmod +x ./start.sh
 EXPOSE 4000
 CMD ["./start.sh"]
