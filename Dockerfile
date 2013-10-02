@@ -44,7 +44,7 @@ RUN apt-get install -y -q libsqlite3-dev
 RUN apt-get install -y -q nodejs
 RUN apt-get install -y -q cron
 
-RUN git clone https://github.com/zdk/bennett -b docker
+RUN git clone https://github.com/zdk/bennett -b deploy-docker
 ENV RAILS_ENV production
 RUN (cd bennett && bundle install && rake bennett:setup)
 EXPOSE 4000
