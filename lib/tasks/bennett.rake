@@ -4,7 +4,7 @@ namespace :bennett do
   task :start do
     Rails.env = ENV['RAILS_ENV'] || 'production'
     system <<-CMD
-      redis-server config/redis.conf
+      redis-server #{Rails.root}/config/redis.conf
     CMD
     Rake::Task['workers:restart'].invoke
     Rake::Task['unicorn:restart'].invoke
